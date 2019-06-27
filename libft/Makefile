@@ -6,7 +6,7 @@
 #    By: stenner <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/17 13:35:09 by stenner           #+#    #+#              #
-#    Updated: 2019/06/27 15:47:24 by stenner          ###   ########.fr        #
+#    Updated: 2019/06/27 17:56:36 by stenner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ clean:
 	@rm -f $(SRCO)
 	@echo "\033[93mAll .o Files Removed"
 
-fclean: clean
+fclean:
 	@rm -f $(NAME)
 	@echo "\033[95mLibrary Removed"
 
