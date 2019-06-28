@@ -6,13 +6,15 @@
 #    By: stenner <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/17 13:35:09 by stenner           #+#    #+#              #
-#    Updated: 2019/06/27 17:56:36 by stenner          ###   ########.fr        #
+#    Updated: 2019/06/28 16:20:59 by stenner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-SRC = ft_atoi.c \
+SRC_PATH = ./src/
+
+SRC_NAME = ft_atoi.c \
 		ft_bzero.c \
 		ft_isalnum.c \
 		ft_isalpha.c \
@@ -76,7 +78,10 @@ SRC = ft_atoi.c \
 		ft_foreachs.c \
 		ft_factorial.c \
 		ft_sqrt.c \
-		ft_power.c
+		ft_power.c \
+		get_next_line.c
+
+SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 
 SRCO = $(patsubst %.c, %.o, $(SRC))
 
@@ -88,7 +93,7 @@ $(NAME): $(SRCO)
 	@ar rc $(NAME) $(SRCO)
 	@echo "\033[92mLibrary Compiled"
 
-%.o: %.c
+$(SRC_PATH)%.o: $(SRC_PATH)%.c
 	@gcc $(FLAGS) -c $< -o $@
 
 clean:
