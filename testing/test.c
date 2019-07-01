@@ -6,20 +6,23 @@
 /*   By: stenner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:29:55 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/01 16:59:31 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/01 17:52:28 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include <stdio.h>
 
-void	ft_swap(int *a, int *b)
+void	ft_swap(void *a, void *b, size_t s)
 {
-	int tmp_a;
+	char *tmp_a;
 
-	tmp_a = *a;
-	*a = *b;
-	*b = tmp_a;
+	tmp_a = ft_memalloc(s);
+
+	ft_memmove(tmp_a, a, s);
+	ft_memmove(a, b, s);
+	ft_memmove(b, tmp_a, s);
+	free(tmp_a);
 }
 
 int rgb(int r, int g, int b)
@@ -65,10 +68,10 @@ void pixel_put_image(t_mlx_image *img, int colour, int x, int y)
 {
 	int *data;
 
-	if (x > img->width)
-		x = img->width;
-	if (y > img->height)
-		y = img->height;
+	if (x >= img->width || x < 0)
+		return;
+	if (y >= img->height || y < 0)
+		return;
 	data = (int*)&img->raw_data[x * 4 + y * img->size_line];
 
 	*data = colour;
@@ -111,28 +114,23 @@ int draw_line_lower(t_coord c1, t_coord c2, t_environment *env)
 {
 	int deltaX;
 	int deltaY;
-	int i;
-	int j;
-	int e;
 
+	if (c1.x > c2.x)
+		ft_swap(&c1, &c2, sizeof(t_coord));
 	deltaX = c2.x - c1.x;
 	deltaY = c2.y - c1.y;
-	j = c1.y;
-	i = c1.x;
-	e = deltaY - deltaX;
-	while (i < c2.x)
+	double grad = deltaY / (double)deltaX;
+	int i = 0;
+	while (i < deltaX)
 	{
-		//mlx_pixel_put(env->mlx_ptr, env->win_ptr, i, j, rgb(255,0,255));
-		pixel_put_image(&env->img, 0xff00ff, i, j);
-		if (e > 0)
-		{
-			j++;
-			e -= deltaX;
-		}
+		double q = ((c1.y + i * grad) - (int)(c1.y + i * grad));
+		double iq = 1 - q;
+		pixel_put_image(&env->img, rgb(0 * iq, 255 * iq, 255 * iq), c1.x + i,
+		c1.y + i * grad);
+		pixel_put_image(&env->img, rgb(0 * q, 255 * q, 255 * q), c1.x + i,
+		(c1.y + i * grad) + 1);
 		i++;
-		e+= deltaY;
 	}
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 400, 200, rgb(255, 0,255), ft_itoa(deltaY));
 	return (0);
 }
 
@@ -140,28 +138,24 @@ int draw_line_upper(t_coord c1, t_coord c2, t_environment *env)
 {
 	int deltaX;
 	int deltaY;
-	int i;
-	int j;
-	int e;
 
+	if (c1.y > c2.y)
+		ft_swap(&c1, &c2, sizeof(t_coord));
 	deltaX = c2.x - c1.x;
 	deltaY = c2.y - c1.y;
-	j = c1.y;
-	i = c1.x;
-	e = deltaY - deltaX;
-	while (j < c2.y)
+	double grad = deltaX / (double)deltaY;
+	int i = 0;
+	while (i < deltaY)
 	{
-		//mlx_pixel_put(env->mlx_ptr, env->win_ptr, i, j, rgb(0,255,255));
-		pixel_put_image(&env->img, 0x00ffff, i, j);
-		if (e > 0)
-		{
-			i++;
-			e -= deltaY;
-		}
-		j++;
-		e+= deltaX;
+		double q = ((c1.x + i * grad) - (int)(c1.x + i * grad));
+		double iq = 1 - q;
+		printf("%lf\n", q);
+		pixel_put_image(&env->img, rgb(0 * iq, 255 * iq, 255 * iq), c1.x + i * grad,
+		c1.y + i);
+		pixel_put_image(&env->img, rgb(0 * q, 255 * q, 255 * q), (c1.x + i * grad) + 1,
+		c1.y + i);
+		i++;
 	}
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 400, 100, rgb(0,255,255), ft_itoa(deltaY));
 	return (0);
 }
 
@@ -186,11 +180,10 @@ int colour(t_environment *env, int colour)
 
 void draw_line(t_coord c1, t_coord c2, t_environment* env)
 {
-	//if ((c2.y - c1.y) / ((c2.x - c1.x) == 0 ? 0.000001f : c2.x - c1.x) <= 1)
 	int deltaX = c2.x - c1.x;
 	int deltaY = c2.y - c1.y;
 
-	if (deltaX < deltaY)
+	if (abs(deltaX) < abs(deltaY))
 		draw_line_upper(c1, c2, env);
 	else
 		draw_line_lower(c1, c2, env);
@@ -215,6 +208,7 @@ int test2(int x, int y, t_environment *env)
 	origin.y = 300;
 	dest.x = x;
 	dest.y = y;
+	clear_image(&env->img, 0x00000000);
 	draw_line(origin, dest, env);
 	put_image(env, &env->img);
 	return (0);
