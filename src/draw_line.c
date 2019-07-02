@@ -1,20 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stenner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/28 16:29:55 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/02 12:25:22 by stenner          ###   ########.fr       */
+/*   Created: 2019/07/02 11:26:45 by stenner           #+#    #+#             */
+/*   Updated: 2019/07/02 12:23:53 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-#include "../src/draw_line.c"
-#include <stdio.h>
-/*
+#include "../testing/test.c"
 void pixel_put_image(t_mlx_image *img, int colour, int x, int y)
 {
 	int *data;
@@ -60,52 +57,63 @@ void put_image(t_environment *env, t_mlx_image *img)
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, img->img_ptr,
 	img->pos.x, img->pos.y);
 }
-*/
-int test(int key, void *param)
+
+///////////////////////////////////////////
+static void	draw_line_lower(t_coord c1, t_coord c2, t_environment *env)
 {
-	(void)param;
-	if (key == 53)
+	int			i;
+	t_line_math l;
+
+	if (c1.x > c2.x)
+		ft_swap(&c1, &c2, sizeof(t_coord));
+	l.delta_x = c2.x - c1.x;
+	l.delta_y = c2.y - c1.y;
+	l.grad = l.delta_y / (double)l.delta_x;
+	i = 0;
+	while (i < l.delta_x)
 	{
-		exit(0);
+		l.q = ((c1.y + i * l.grad) - (int)(c1.y + i * l.grad));
+		l.iq = 1 - l.q;
+		pixel_put_image(&env->img, ft_rgbtoi(0 * l.iq, 255 * l.iq, 255 * l.iq),
+		c1.x + i, c1.y + i * l.grad);
+		pixel_put_image(&env->img, ft_rgbtoi(0 * l.q, 255 * l.q, 255 * l.q),
+		c1.x + i, (c1.y + i * l.grad) + 1);
+		i++;
 	}
-	return (0);
 }
 
-int test2(int x, int y, t_environment *env)
+static void	draw_line_upper(t_coord c1, t_coord c2, t_environment *env)
 {
-	t_coord origin;
-	t_coord dest;
+	int			i;
+	t_line_math l;
 
-	origin.x = 300;
-	origin.y = 300;
-	dest.x = x;
-	dest.y = y;
-	clear_image(&env->img, 0x00000000);
-	draw_line(origin, dest, env);
-	put_image(env, &env->img);
-	return (0);
+	if (c1.y > c2.y)
+		ft_swap(&c1, &c2, sizeof(t_coord));
+	l.delta_x = c2.x - c1.x;
+	l.delta_y = c2.y - c1.y;
+	l.grad = l.delta_x / (double)l.delta_y;
+	i = 0;
+	while (i < l.delta_y)
+	{
+		l.q = ((c1.x + i * l.grad) - (int)(c1.x + i * l.grad));
+		l.iq = 1 - l.q;
+		pixel_put_image(&env->img, ft_rgbtoi(0 * l.iq, 255 * l.iq, 255 * l.iq),
+		c1.x + i * l.grad, c1.y + i);
+		pixel_put_image(&env->img, ft_rgbtoi(0 * l.q, 255 * l.q, 255 * l.q),
+		(c1.x + i * l.grad) + 1, c1.y + i);
+		i++;
+	}
 }
 
-int finish(void *none)
+void		draw_line(t_coord c1, t_coord c2, t_environment *env)
 {
-	(void)none;
-	exit(0);
-}
+	int			delta_x;
+	int			delta_y;
 
-// 4 Press
-// 5 release
-// 6 move
-
-int		main(void)
-{
-	t_environment env;
-
-	env.mlx_ptr = mlx_init();
-	env.win_ptr = mlx_new_window(env.mlx_ptr, 600, 600, "Test");
-	init_image(&env, &env.img, 600, 600);
-	mlx_key_hook(env.win_ptr, test,(void *)0);
-	mlx_hook(env.win_ptr, 6, 0L, test2, &env);
-	mlx_hook(env.win_ptr, 17, 0L, finish, &env);
-	mlx_loop(env.mlx_ptr);
-	return (0);
+	delta_x = c2.x - c1.x;
+	delta_y = c2.y - c1.y;
+	if (abs(delta_x) < abs(delta_y))
+		draw_line_upper(c1, c2, env);
+	else
+		draw_line_lower(c1, c2, env);
 }

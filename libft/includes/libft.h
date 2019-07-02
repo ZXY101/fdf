@@ -6,7 +6,7 @@
 /*   By: stenner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 09:42:10 by stenner           #+#    #+#             */
-/*   Updated: 2019/06/28 15:49:07 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/02 12:17:27 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,6 @@ void				ft_foreachs(char *arr, size_t n, void (*f)(char));
 **After
 */
 int					get_next_line(const int fd, char **line);
+void				ft_swap(void *a, void *b, size_t s);
+int					ft_rgbtoi(int r, int g, int b);
 #endif
