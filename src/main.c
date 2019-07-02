@@ -6,7 +6,7 @@
 /*   By: stenner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:29:55 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/02 15:17:13 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/02 15:43:13 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ int loop_hook(t_environment *env)
 	up = ndc_to_screen_space(up);
 	down = ndc_to_screen_space(down);
 	clear_image(&env->img, 0x00000000);
-	t_rgb red, blue, green, yellow;
+	t_rgb red, blue, green, yellow, white;
 	FILL_RGB(red, 255, 0, 0);
 	FILL_RGB(blue, 0, 0, 255);
 	FILL_RGB(green, 0, 255, 0);
 	FILL_RGB(yellow, 255, 255, 0);
+	FILL_RGB(white, 255, 255, 255);
 	draw_line(down, left, &env->img, red);
 	draw_line(left, up, &env->img, blue);
 	draw_line(up, right, &env->img, green);
@@ -85,8 +86,9 @@ int		main(void)
 	t_environment env;
 
 	env.mlx_ptr = mlx_init();
-	env.win_ptr = mlx_new_window(env.mlx_ptr, 600, 600, "Test");
-	init_image(&env, &env.img, 600, 600);
+	env.win_ptr = mlx_new_window(env.mlx_ptr, WINDOW_LENGTH, WINDOW_HEIGHT,
+	"Test");
+	init_image(&env, &env.img, WINDOW_LENGTH, WINDOW_HEIGHT);
 	mlx_key_hook(env.win_ptr, test,(void *)0);
 //	mlx_hook(env.win_ptr, 6, 0L, mouse_line_follow, &env);
 	mlx_hook(env.win_ptr, 17, 0L, finish, &env);
