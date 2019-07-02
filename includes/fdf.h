@@ -6,7 +6,7 @@
 /*   By: stenner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/02 12:21:51 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/02 12:47:17 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,9 @@ typedef struct	s_environment
 }				t_environment;
 
 void			draw_line(t_coord c1, t_coord c2, t_environment *env);
+void			pixel_put_image(t_mlx_image *img, int colour, int x, int y);
+void			clear_image(t_mlx_image *img, int colour);
+void			init_image(t_environment *env, t_mlx_image *img,
+				int width, int height);
+void			put_image(t_environment *env, t_mlx_image *img);
 #endif
