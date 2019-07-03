@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rgbtoi.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stenner <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 12:15:02 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/02 12:16:29 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/03 15:09:27 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_rgbtoi(int r, int g, int b)
+int	ft_rgbtoi(int r, int g, int b)
 {
 	int rgb;
 
@@ -27,5 +27,5 @@ int ft_rgbtoi(int r, int g, int b)
 	if (b < 0)
 		b = 0;
 	rgb = 0x010000 * r + 0x000100 * g + b;
-	return rgb;
+	return (rgb);
 }
