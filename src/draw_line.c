@@ -6,11 +6,18 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:26:45 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/03 10:45:00 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/03 12:13:38 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+**This c file includes all functions needed to draw a line between two points
+*/
 #include "../includes/fdf.h"
+
+/*
+**Line drawing algorithm for when m < 1
+*/
 static void	draw_line_lower(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
 {
 	int			i;
@@ -33,7 +40,9 @@ static void	draw_line_lower(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
 		i++;
 	}
 }
-
+/*
+**Line drawing algorithm for when m > 1
+*/
 static void	draw_line_upper(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
 {
 	int			i;
@@ -57,6 +66,9 @@ static void	draw_line_upper(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
 	}
 }
 
+/*
+**Check to see which algorithm to use
+*/
 void		draw_line(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
 {
 	int			delta_x;
