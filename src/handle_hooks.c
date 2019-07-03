@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   handle_hooks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/28 16:29:55 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/03 12:00:13 by stenner          ###   ########.fr       */
+/*   Created: 2019/07/03 11:59:01 by stenner           #+#    #+#             */
+/*   Updated: 2019/07/03 12:01:21 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int		main(void)
+int key_input(int key, void *param)
 {
-	t_environment env;
-
-	env.mlx_ptr = mlx_init();
-	env.win_ptr = mlx_new_window(env.mlx_ptr, WINDOW_LENGTH, WINDOW_HEIGHT,
-	"fdf");
-	init_image(&env, &env.img, WINDOW_LENGTH, WINDOW_HEIGHT);
-	//Handle Key Presses
-	mlx_key_hook(env.win_ptr, key_input,(void *)0);
-	//Quit Program When You Close The Window
-	mlx_hook(env.win_ptr, 17, 0L, finish, &env);
-
-	mlx_loop(env.mlx_ptr);
+	(void)param;
+	if (key == 53)
+	{
+		exit(0);
+	}
 	return (0);
+}
+
+int finish(void *none)
+{
+	(void)none;
+	exit(0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   images.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stenner <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 12:45:17 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/02 13:23:22 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/03 11:52:52 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	init_image(t_environment *env, t_mlx_image *img, int width, int height)
 	img->height = height;
 	img->pos.x = 0;
 	img->pos.y = 0;
-	clear_image(img, 0x000000ff);
+	clear_image(img, 0x000000);
 }
 
 void	put_image(t_environment *env, t_mlx_image *img)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: stenner <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: stenner <stenner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/27 17:28:44 by stenner           #+#    #+#              #
-#    Updated: 2019/07/02 13:13:56 by stenner          ###   ########.fr        #
+#    Updated: 2019/07/03 12:00:31 by stenner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ SRC_PATH = ./src/
 
 SRC_NAME = main.c \
 	   	   draw_line.c \
-		   images.c
+		   images.c \
+		   gfx_utility.c \
+		   handle_hooks.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 

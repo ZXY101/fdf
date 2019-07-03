@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stenner <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/02 15:44:00 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/03 12:00:11 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-# define WINDOW_LENGTH 600
+# define WINDOW_LENGTH 1000
 # define WINDOW_HEIGHT 600
 # define FILL_COORD(C, X, Y) C.x = X, C.y = Y
 # define FILL_RGB(RGB, R, G, B) RGB.r = R, RGB.g = G, RGB.b = B
@@ -68,4 +68,10 @@ void			clear_image(t_mlx_image *img, int colour);
 void			init_image(t_environment *env, t_mlx_image *img,
 				int width, int height);
 void			put_image(t_environment *env, t_mlx_image *img);
+t_coord			ndc_to_screen_space(t_coord coord);
+/* 
+**Hooks
+*/
+int key_input(int key, void *param);
+int finish(void *none);
 #endif
