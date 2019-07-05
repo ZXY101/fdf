@@ -6,7 +6,7 @@
 #    By: stenner <stenner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/27 17:28:44 by stenner           #+#    #+#              #
-#    Updated: 2019/07/03 12:00:31 by stenner          ###   ########.fr        #
+#    Updated: 2019/07/05 15:58:02 by stenner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC_NAME = main.c \
 	   	   draw_line.c \
 		   images.c \
 		   gfx_utility.c \
-		   handle_hooks.c
+		   handle_hooks.c \
+		   handle_coords.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 

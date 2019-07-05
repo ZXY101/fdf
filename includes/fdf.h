@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/05 13:34:28 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/05 16:12:44 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "../libft/includes/libft.h"
 # include <mlx.h>
 # include <math.h>
+//REMOVE
+# include <stdio.h>
 
 typedef struct	s_map_data
 {
@@ -95,4 +97,13 @@ void			put_image(t_environment *env, t_mlx_image *img);
 
 int				key_input(int key, void *param);
 int				finish(void *none);
+void			handle_hooks(t_environment *env);
+
+/*
+**Coords
+*/
+
+void			malloc_coords(int fd, t_coord **coords, t_map_data *map_data);
+t_coord			*get_coords(int fd, t_coord *coords);
+void			handle_coords(int ac, char **av);
 #endif
