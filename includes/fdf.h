@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/03 15:12:03 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/05 13:34:28 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@
 # include "../libft/includes/libft.h"
 # include <mlx.h>
 # include <math.h>
+
+typedef struct	s_map_data
+{
+	char		*line;
+	char		**line_split;
+	int			coord_count;
+	int			x_coords;
+	int			y_coords;
+	int			i;
+}				t_map_data;
 
 typedef struct	s_rgb
 {
