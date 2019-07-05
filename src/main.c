@@ -6,11 +6,13 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:29:55 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/05 16:11:53 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/05 17:20:57 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+
 
 int		main(int ac, char **av)
 {
@@ -25,8 +27,12 @@ int		main(int ac, char **av)
 	env.win_ptr = mlx_new_window(env.mlx_ptr, WINDOW_LENGTH, WINDOW_HEIGHT,
 	"fdf");
 	init_image(&env, &env.img, WINDOW_LENGTH, WINDOW_HEIGHT);
-	handle_coords(ac, av);
-	handle_hooks(&env);
+	(void)av;
+	//handle_coords(ac, av);
+
+	handle_hooks(env.win_ptr, &env);
+
+	put_image(&env, &env.img);
 	mlx_loop(env.mlx_ptr);
 	return (0);
 }

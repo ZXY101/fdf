@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:13:27 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/03 15:07:33 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/05 16:29:30 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,28 @@ t_coord	ndc_to_screen_space(t_coord coord)
 	ret.x *= WINDOW_LENGTH;
 	ret.y *= WINDOW_HEIGHT;
 	return (ret);
+}
+
+/*
+**Function to take 3 rgb values and returns a the colour integer
+*/
+
+int		rgbtoi(int r, int g, int b)
+{
+	int rgb;
+
+	if (r > 255)
+		r = 255;
+	if (g > 255)
+		g = 255;
+	if (b > 255)
+		b = 255;
+	if (r < 0)
+		r = 0;
+	if (g < 0)
+		g = 0;
+	if (b < 0)
+		b = 0;
+	rgb = 0x010000 * r + 0x000100 * g + b;
+	return (rgb);
 }

@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:26:45 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/03 15:32:40 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/05 16:30:10 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	draw_line_lower(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
 	{
 		l.q = ((c1.y + i * l.grad) - (int)(c1.y + i * l.grad));
 		l.iq = 1 - l.q;
-		pixel_put_image(img, ft_rgbtoi(rgb.r * l.iq, rgb.g * l.iq, rgb.b * l.iq)
+		pixel_put_image(img, rgbtoi(rgb.r * l.iq, rgb.g * l.iq, rgb.b * l.iq)
 		, c1.x + i, c1.y + i * l.grad);
-		pixel_put_image(img, ft_rgbtoi(rgb.r * l.q, rgb.g * l.q, rgb.b * l.q)
+		pixel_put_image(img, rgbtoi(rgb.r * l.q, rgb.g * l.q, rgb.b * l.q)
 		, c1.x + i, (c1.y + i * l.grad) + 1);
 		i++;
 	}
@@ -62,9 +62,9 @@ static void	draw_line_upper(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
 	{
 		l.q = ((c1.x + i * l.grad) - (int)(c1.x + i * l.grad));
 		l.iq = 1 - l.q;
-		pixel_put_image(img, ft_rgbtoi(rgb.r * l.iq, rgb.g * l.iq, rgb.b * l.iq)
+		pixel_put_image(img, rgbtoi(rgb.r * l.iq, rgb.g * l.iq, rgb.b * l.iq)
 		, c1.x + i * l.grad, c1.y + i);
-		pixel_put_image(img, ft_rgbtoi(rgb.r * l.q, rgb.g * l.q, rgb.b * l.q),
+		pixel_put_image(img, rgbtoi(rgb.r * l.q, rgb.g * l.q, rgb.b * l.q),
 		(c1.x + i * l.grad) + 1, c1.y + i);
 		i++;
 	}
