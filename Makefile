@@ -6,7 +6,7 @@
 #    By: stenner <stenner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/27 17:28:44 by stenner           #+#    #+#              #
-#    Updated: 2019/07/05 15:58:02 by stenner          ###   ########.fr        #
+#    Updated: 2019/07/05 18:42:21 by stenner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 SRCO = $(patsubst %.c, %.o, $(SRC))
 
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
+MLX_LFLAGS =  -lmlx -lXext -lX11 -lm
 
 FLAGS = -Wall -Werror -Wextra
 
@@ -35,7 +36,7 @@ all: $(NAME)
 
 $(NAME): $(SRCO)
 	@make -C $(LIBFT_PATH)
-	@gcc $(FLAGS) $(SRCO) $(INC) -L $(LIBFT_PATH) -lft -o $(NAME) $(MLX_FLAGS)
+	@gcc $(FLAGS) $(SRCO) $(INC) -L $(LIBFT_PATH) -lft -o $(NAME) $(MLX_LFLAGS)
 	@echo "\033[32mBinary \033[1;32m$(NAME)\033[1;0m\033[32m Created.\033[0m"
 
 $(SRC_PATH)%.o: $(SRC_PATH)%.c

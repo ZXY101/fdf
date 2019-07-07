@@ -69,11 +69,10 @@ t_coord		*get_coords(int fd, t_coord *coords)
 	return (coords);
 }
 
-void		handle_coords(int ac, char **av)
+void		handle_coords(int ac, char **av,
+t_coord **coords, t_map_data *map_data)
 {
 	int			fd;
-	t_coord		*coords;
-	t_map_data	map_data;
 
 	if (ac < 2)
 	{
@@ -86,7 +85,7 @@ void		handle_coords(int ac, char **av)
 		ft_putendl("Invalid map");
 		exit(2);
 	}
-	malloc_coords(fd, &coords, &map_data);
+	malloc_coords(fd, &*coords, &*map_data);
 	if (close(fd) == -1)
 		exit(0);
 	fd = open(av[1], O_RDONLY);
@@ -95,5 +94,5 @@ void		handle_coords(int ac, char **av)
 		ft_putendl("Invalid map");
 		exit(2);
 	}
-	coords = get_coords(fd, coords);
+	*coords = get_coords(fd, *coords);
 }

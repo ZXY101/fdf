@@ -23,7 +23,7 @@
 int		key_input(int key, void *param)
 {
 	(void)param;
-	if (key == 53)
+	if (key == 53 || key == 0xff1b)
 	{
 		exit(0);
 	}

@@ -106,5 +106,7 @@ void			handle_hooks(void *win_ptr, t_environment *env);
 
 void			malloc_coords(int fd, t_coord **coords, t_map_data *map_data);
 t_coord			*get_coords(int fd, t_coord *coords);
-void			handle_coords(int ac, char **av);
+// void			handle_coords(int ac, char **av);
+void		handle_coords(int ac, char **av,
+t_coord **coords, t_map_data *map_data);
 #endif
