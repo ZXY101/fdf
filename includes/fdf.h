@@ -72,7 +72,23 @@ typedef struct	s_environment
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_mlx_image	img;
+	t_coord		*coords;
+	t_map_data	map_data;
 }				t_environment;
+
+
+typedef struct s_vector
+{
+	double x;
+	double y;
+	double z;
+	double w;
+} 				t_vector;
+
+typedef struct s_matrix
+{
+	double matrix[16];
+}				t_matrix;
 
 /*
 **Utility

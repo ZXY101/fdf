@@ -14,19 +14,6 @@
 
 #define FILL_VECTOR(V, X, Y, Z, W) V.x = X, V.y = Y, V.z = Z, V.w = W
 
-typedef struct s_vector
-{
-	double x;
-	double y;
-	double z;
-	double w;
-} 				t_vector;
-
-typedef struct s_matrix
-{
-	double matrix[16];
-}				t_matrix;
-
 t_vector vector_multiply(t_vector vector, t_matrix m)
 {
 	t_vector ret;
@@ -48,7 +35,7 @@ t_matrix	init_projection_matrix()
 {
 	double near = 0.1;
 	double far = 1000;
-	double fov = 200;
+	double fov = 90;
 	double aspect_ratio = (double)WINDOW_HEIGHT/ WINDOW_LENGTH;
 	double fov_rad = 1 / tan(fov * 0.5 / 180 * 3.14159);
 	t_matrix m;
@@ -69,34 +56,55 @@ t_matrix	init_projection_matrix()
 	return (m);
 }
 
-t_matrix	init_rotate_matrix()
+t_matrix	init_rotatez_matrix()
 {
-	double theta = 0.5;
+	double theta = 1;
 	t_matrix m;
-	
+	int i;
+
+	i = 0;
+	while (i < 16)
+	{
+		m.matrix[i] = 0;
+		i++;
+	}
 	m.matrix[0] = cos(theta);
 	m.matrix[1] = sin(theta);
-	m.matrix[2] = 0;
-	m.matrix[3] = 0;
 
 	m.matrix[4] = -sin(theta);
 	m.matrix[5] = cos(theta);
-	m.matrix[6] = 0;
-	m.matrix[7] = 0;
 
-	m.matrix[8] = 0;
 	m.matrix[9] = 1;
-	m.matrix[10] = 0;
-	m.matrix[11] = 0;
 
-	m.matrix[12] = 0;
-	m.matrix[13] = 0;
-	m.matrix[14] = 0;
 	m.matrix[15] = 1;
 	
 	return (m);
 }
 
+t_matrix	init_rotatex_matrix()
+{
+	static double theta = 1;
+	t_matrix m;
+	int i;
+
+	i = 0;
+	while (i < 16)
+	{
+		m.matrix[i] = 0;
+		i++;
+	}
+	m.matrix[0] = 1;
+	m.matrix[4] = cos(theta * 0.5);
+
+	m.matrix[5] = sin(theta * 0.5);
+	m.matrix[8] = -sin(theta) * 0.5;
+
+	m.matrix[9] = cos(theta * 0.5);
+
+	m.matrix[15] = 1;
+	
+	return (m);
+}
 int		main(int ac, char **av)
 {
 	t_environment	env;
@@ -115,9 +123,10 @@ int		main(int ac, char **av)
 	handle_coords(ac, av, &coords, &map_data);
 
 	/////////////////
-	t_matrix projection_matrix, rotation_matrix;
+	t_matrix projection_matrix, rotation_matrixz, rotation_matrixx;
 	projection_matrix = init_projection_matrix();
-	rotation_matrix = init_rotate_matrix();
+	rotation_matrixz = init_rotatez_matrix();
+	rotation_matrixx = init_rotatex_matrix();
 
 	t_vector vector;
 	////////////////
@@ -132,18 +141,38 @@ int		main(int ac, char **av)
 	{
 		FILL_VECTOR(vector, coords[i].x, coords[i].y, coords[i].z + 3, 1);
 		vector = vector_multiply(vector, projection_matrix);
-		vector = vector_multiply(vector, rotation_matrix);
+		vector = vector_multiply(vector, rotation_matrixz);
+		vector = vector_multiply(vector, rotation_matrixx);
 
-		coords[i].x = -vector.x/2;
-		coords[i].y = vector.y/2;
+		coords[i].x = -vector.x/2 ;
+		coords[i].y = vector.y/2 ;
+	
 
 		coords[i] = ndc_to_screen_space(coords[i]);
-		pixel_put_image(&env.img, rgbtoi(500 - i , 50, i), coords[i].x, coords[i].y);
-	//	mlx_string_put(env.mlx_ptr, env.win_ptr, coords[i].x, coords[i].y, 0xffffff, ft_itoa(i));
 		i++;
 	}
+	i = 0;
+	int x = 1;
+	int y = 1;
+	while (i < map_data.coord_count)
+	{
+		if(x != map_data.x_coords)
+			draw_line(coords[i], coords[i + 1], &env.img, rgb2);
+		else
+		{
+			x = 0;
+			y++;
+		}
+		if (y != map_data.y_coords && i+ 1 != map_data.coord_count)
+			draw_line(coords[i], coords[i + map_data.x_coords], &env.img, rgb2);
+		if (y != map_data.y_coords &&x != map_data.x_coords)
+			draw_line(coords[i + 1], coords[i + map_data.x_coords], &env.img, rgb2);
+		
+		pixel_put_image(&env.img, rgbtoi(255,0,0), coords[i].x, coords[i].y);
+		i++;
+		x++;
+	}
 	////////////////////
-
 	handle_hooks(env.win_ptr, &env);
 
 	put_image(&env, &env.img);
