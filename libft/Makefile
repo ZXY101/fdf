@@ -6,7 +6,7 @@
 #    By: stenner <stenner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/17 13:35:09 by stenner           #+#    #+#              #
-#    Updated: 2019/07/05 16:26:40 by stenner          ###   ########.fr        #
+#    Updated: 2019/07/09 12:23:02 by stenner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,18 +92,18 @@ all: $(NAME)
 
 $(NAME): $(SRCO)
 	@ar rc $(NAME) $(SRCO)
-	@echo "\033[92mLibrary Compiled."
+	@echo "\033[95mLibft Compiled."
 
 $(SRC_PATH)%.o: $(SRC_PATH)%.c
 	@gcc $(FLAGS) -c $< -o $@
 
 clean:
 	@rm -f $(SRCO)
-	@echo "\033[93mLibrary Object Files Removed."
+	@echo "\033[91mLibft Object Files Removed."
 
-fclean:
+fclean: clean
 	@rm -f $(NAME)
-	@echo "\033[93mLibrary Removed."
+	@echo "\033[91mLibft Removed."
 
 re:	fclean all
 
