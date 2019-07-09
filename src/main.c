@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:29:55 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/09 12:23:16 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/09 14:26:01 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,15 @@ int		main(int ac, char **av)
 	"fdf");
 	init_image(&env, &env.img, WINDOW_LENGTH, WINDOW_HEIGHT);
 	handle_coords(ac, av, &env.coords, &env.map_data);
+	////
+	int i = 0;
+	while (i < env.map_data.coord_count)
+	{
+		pixel_put_image(&env.img, 0x0000ff, env.coords[i].x*20, env.coords[i].y*20);
+		put_image(&env, &env.img);
+		i++;
+	}
+	////
 	handle_hooks(env.win_ptr, &env);
 	mlx_loop(env.mlx_ptr);
 	return (0);

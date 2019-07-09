@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_multiply.c                                  :+:      :+:    :+:   */
+/*   vector_subtract.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 14:47:07 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/09 14:50:40 by stenner          ###   ########.fr       */
+/*   Created: 2019/07/09 14:45:05 by stenner           #+#    #+#             */
+/*   Updated: 2019/07/09 14:45:38 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vector_lib.h"
 
-t_vector	vector_multiply(t_vector v, double k)
+t_vector	vector_subtract(t_vector v1, t_vector v2)
 {
 	t_vector ret;
-
-	ret.x = v.x * k;
-	ret.y = v.y * k;
-	ret.z = v.z * k;
+	
+	ret.x = v1.x - v2.x;
+	ret.y = v1.y - v2.y;
+	ret.z = v1.z - v2.z;
 	return (ret);
 }

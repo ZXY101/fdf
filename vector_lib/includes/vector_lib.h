@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 10:21:26 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/09 11:34:24 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/09 15:14:01 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ typedef struct	s_matrix
 	double m[4][4];
 }				t_matrix;
 
-t_vector	vector_multiply(t_vector vector, t_matrix m);
+t_vector	vector_matrix_multiply(t_vector vector, t_matrix m);
+t_vector	vector_add(t_vector v1, t_vector v2);
+t_vector	vector_subtract(t_vector v1, t_vector v2);
+t_vector	vector_multiply(t_vector v, double k);
+t_vector	vector_divide(t_vector v, double k);
 
 #endif

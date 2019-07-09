@@ -2,7 +2,11 @@ NAME = vector_lib.a
 
 SRC_PATH = ./src/
 
-SRC_NAME = vector_multiply.c
+SRC_NAME =	vector_matrix_multiply.c \
+			vector_add.c \
+			vector_subtract.c \
+			vector_multiply.c \
+			vector_divide.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 

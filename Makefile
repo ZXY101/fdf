@@ -6,7 +6,7 @@
 #    By: stenner <stenner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/27 17:28:44 by stenner           #+#    #+#              #
-#    Updated: 2019/07/09 12:09:27 by stenner          ###   ########.fr        #
+#    Updated: 2019/07/09 14:42:54 by stenner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,12 @@ VEC_LIB__PATH = ./vector_lib/
 
 SRC_PATH = ./src/
 
-SRC_NAME = main.c \
-	   	   draw_line.c \
-		   images.c \
-		   gfx_utility.c \
-		   handle_hooks.c \
-		   handle_coords.c
+SRC_NAME =	main.c \
+			draw_line.c \
+			images.c \
+			gfx_utility.c \
+			handle_hooks.c \
+			handle_coords.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 
