@@ -6,13 +6,14 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 10:21:26 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/09 15:14:01 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/10 11:19:34 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_LIB_H
 # define VECTOR_LIB_H
 # define FILL_VECTOR(V, X, Y, Z, W) V.x = X, V.y = Y, V.z = Z, V.w = W
+# include <math.h>
 
 typedef struct	s_vector
 {
@@ -32,5 +33,9 @@ t_vector	vector_add(t_vector v1, t_vector v2);
 t_vector	vector_subtract(t_vector v1, t_vector v2);
 t_vector	vector_multiply(t_vector v, double k);
 t_vector	vector_divide(t_vector v, double k);
+double		vector_dot_product(t_vector v1, t_vector v2);
+double		vector_length(t_vector v);
+t_vector	vector_normalise(t_vector v);
+t_vector	vector_cross_product(t_vector v1, t_vector v2);
 
 #endif

@@ -6,7 +6,11 @@ SRC_NAME =	vector_matrix_multiply.c \
 			vector_add.c \
 			vector_subtract.c \
 			vector_multiply.c \
-			vector_divide.c
+			vector_divide.c \
+			vector_dot_product.c \
+			vector_length.c \
+			vector_normalise.c \
+			vector_cross_product.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 
