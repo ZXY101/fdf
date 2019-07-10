@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libvec.h                                       :+:      :+:    :+:   */
+/*   libvec.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 10:21:26 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/10 12:16:17 by stenner          ###   ########.fr       */
+/*   Created: 2019/07/10 14:56:29 by stenner           #+#    #+#             */
+/*   Updated: 2019/07/10 15:21:44 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct	s_matrix
 **Vector Functions
 */
 
-t_vector		vector_matrix_multiply(t_vector vector, t_matrix m);
 t_vector		vector_add(t_vector v1, t_vector v2);
 t_vector		vector_subtract(t_vector v1, t_vector v2);
 t_vector		vector_multiply(t_vector v, double k);
@@ -46,7 +45,14 @@ t_vector		vector_cross_product(t_vector v1, t_vector v2);
 **Matrix Functions
 */
 
+t_vector		matrix_vector_multiply(t_vector vector, t_matrix m);
 t_matrix		matrix_make_identity();
 t_matrix		matrix_rotate_x(double theta);
+t_matrix		matrix_rotate_y(double theta);
+t_matrix		matrix_rotate_z(double theta);
+t_matrix		matrix_translate(double x, double y, double z);
+t_matrix		matrix_projection(double fov, double a_r,
+				double near, double far);
+t_matrix		matrix_matrix_multiply(t_matrix m1, t_matrix m2);
 
 #endif

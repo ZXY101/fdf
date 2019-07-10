@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:29:55 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/10 13:14:44 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/10 15:34:22 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,18 +105,30 @@ int		main(int ac, char **av)
 	handle_coords(ac, av, &env.coords, &env.map_data);
 	////
 	t_vector v;
+	t_matrix mx,my,mz,mm;
+	mx = matrix_rotate_x(1);
+	my = matrix_rotate_y(1);
+	mz = matrix_rotate_z(1);
+	mm = matrix_matrix_multiply(mx,my);
+	(void)mx;
+	(void)my;
+	(void)mz;
 	int i=0;
 	while (i < env.map_data.coord_count)
 	{
 		FILL_VECTOR(v, env.coords[i].x,env.coords[i].y,env.coords[i].z,1);
-		v = vector_multiply(v, 4);
-		FILL_COORD(env.coords[i], v.x, v.y);
+		v = vector_multiply(v, 10);
+		// v = matrix_vector_multiply(v, mx);
+		// v = matrix_vector_multiply(v, my);
+		//v = matrix_vector_multiply(v, mz);
+		v = matrix_vector_multiply(v, mm);
+		FILL_COORD(env.coords[i], v.x+200, v.y+100);
 		i++;
 	}
 	i = 0;
 	while (i < env.map_data.coord_count)
 	{
-		pixel_put_image(&env.img, 0xffffff, env.coords[i].x*20, env.coords[i].y*20);
+		pixel_put_image(&env.img, 0xffffff, env.coords[i].x, env.coords[i].y);
 		put_image(&env, &env.img);
 		i++;
 	}

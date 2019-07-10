@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_rotate_x.c                                  :+:      :+:    :+:   */
+/*   matrix_projection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 11:47:23 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/10 13:04:23 by stenner          ###   ########.fr       */
+/*   Created: 2019/07/10 14:45:25 by stenner           #+#    #+#             */
+/*   Updated: 2019/07/10 14:54:25 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libvec.h"
 
-t_matrix	matrix_rotate_x(double theta)
+t_matrix	matrix_projection(double fov, double a_r, double near, double far)
 {
 	t_matrix m;
-	int i;
-	int j;
+	double fov_rad;
 
-	i = 0;
-	j = 0;
-	(void)theta;
-	m.m[0][1] = 1;
-	// while (i < 4)
-	// {
-	// 	j = 0;
-	// 	while (j < 4)
-	// 	{
-	// 		m.m[i][j] = 0;
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
-	//m.m[0][0] = 1;
-	return m;
+	fov_rad = 1 / tan(fov * 0.5 / 180 * 3.14159);
+	m.m[0][0] = a_r * fov_rad;
+	m.m[1][1] = fov_rad;
+	m.m[2][2] = far / (far - near);
+	m.m[3][2] = (-far * near) / (far - near);
+	m.m[2][3] = 1;
+	m.m[3][3] = 0;
+	return (m);
 }
