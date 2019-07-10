@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:56:29 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/10 15:21:44 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/10 16:17:10 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBVEC_H
 # define FILL_VECTOR(V, X, Y, Z, W) V.x = X, V.y = Y, V.z = Z, V.w = W
 # include <math.h>
+# include "../../libft/includes/libft.h"
 
 typedef struct	s_vector
 {
