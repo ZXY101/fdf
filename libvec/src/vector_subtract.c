@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_length.c                                    :+:      :+:    :+:   */
+/*   vector_subtract.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 11:03:01 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/10 11:06:53 by stenner          ###   ########.fr       */
+/*   Created: 2019/07/09 14:45:05 by stenner           #+#    #+#             */
+/*   Updated: 2019/07/10 13:04:23 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vector_lib.h"
+#include "../includes/libvec.h"
 
-double	vector_length(t_vector v)
+t_vector	vector_subtract(t_vector v1, t_vector v2)
 {
-	return (sqrt(vector_dot_product(v, v)));
+	t_vector ret;
+
+	ret.x = v1.x - v2.x;
+	ret.y = v1.y - v2.y;
+	ret.z = v1.z - v2.z;
+	return (ret);
 }

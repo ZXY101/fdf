@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:29:55 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/09 14:26:01 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/10 13:14:44 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,19 @@ int		main(int ac, char **av)
 	init_image(&env, &env.img, WINDOW_LENGTH, WINDOW_HEIGHT);
 	handle_coords(ac, av, &env.coords, &env.map_data);
 	////
-	int i = 0;
+	t_vector v;
+	int i=0;
 	while (i < env.map_data.coord_count)
 	{
-		pixel_put_image(&env.img, 0x0000ff, env.coords[i].x*20, env.coords[i].y*20);
+		FILL_VECTOR(v, env.coords[i].x,env.coords[i].y,env.coords[i].z,1);
+		v = vector_multiply(v, 4);
+		FILL_COORD(env.coords[i], v.x, v.y);
+		i++;
+	}
+	i = 0;
+	while (i < env.map_data.coord_count)
+	{
+		pixel_put_image(&env.img, 0xffffff, env.coords[i].x*20, env.coords[i].y*20);
 		put_image(&env, &env.img);
 		i++;
 	}

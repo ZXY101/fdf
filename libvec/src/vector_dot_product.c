@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_subtract.c                                  :+:      :+:    :+:   */
+/*   vector_dot_product.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 14:45:05 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/09 14:45:38 by stenner          ###   ########.fr       */
+/*   Created: 2019/07/10 10:54:29 by stenner           #+#    #+#             */
+/*   Updated: 2019/07/10 13:04:23 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vector_lib.h"
+#include "../includes/libvec.h"
 
-t_vector	vector_subtract(t_vector v1, t_vector v2)
+double	vector_dot_product(t_vector v1, t_vector v2)
 {
-	t_vector ret;
-	
-	ret.x = v1.x - v2.x;
-	ret.y = v1.y - v2.y;
-	ret.z = v1.z - v2.z;
-	return (ret);
+	return ((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z));
 }

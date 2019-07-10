@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/09 12:24:11 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/10 13:04:23 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define FILL_COORD(C, X, Y) C.x = X, C.y = Y
 # define FILL_RGB(RGB, R, G, B) RGB.r = R, RGB.g = G, RGB.b = B
 # include "../libft/includes/libft.h"
-# include "../vector_lib/includes/vector_lib.h"
+# include "../libvec/includes/libvec.h"
 # include <mlx.h>
 # include <math.h>
 //REMOVE

@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_dot_product.c                               :+:      :+:    :+:   */
+/*   vector_normalise.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 10:54:29 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/10 10:59:56 by stenner          ###   ########.fr       */
+/*   Created: 2019/07/10 11:01:37 by stenner           #+#    #+#             */
+/*   Updated: 2019/07/10 13:04:23 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vector_lib.h"
+#include "../includes/libvec.h"
 
-double	vector_dot_product(t_vector v1, t_vector v2)
+t_vector	vector_normalise(t_vector v)
 {
-	return ((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z));
+	t_vector	ret;
+	double		len;
+
+	len = vector_length(v);
+	ret.x = v.x / len;
+	ret.y = v.y / len;
+	ret.z = v.z / len;
+	return (ret);
 }

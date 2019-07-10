@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_normalise.c                                 :+:      :+:    :+:   */
+/*   matrix_make_identity.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 11:01:37 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/10 11:12:02 by stenner          ###   ########.fr       */
+/*   Created: 2019/07/10 11:35:51 by stenner           #+#    #+#             */
+/*   Updated: 2019/07/10 13:04:23 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vector_lib.h"
+#include "../includes/libvec.h"
 
-t_vector	vector_normalise(t_vector v)
+t_matrix	matrix_make_identity(void)
 {
-	t_vector ret;
-	
-	double len = vector_length(v);
-	ret.x = v.x / len;
-	ret.y = v.y / len;
-	ret.z = v.z / len;
-	return (ret);	
+	t_matrix m;
+
+	m.m[0][0] = 1;
+	m.m[1][1] = 1;
+	m.m[2][2] = 1;
+	m.m[3][3] = 1;
+	return (m);
 }

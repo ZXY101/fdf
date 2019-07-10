@@ -1,4 +1,4 @@
-NAME = vector_lib.a
+NAME = libvec.a
 
 SRC_PATH = ./src/
 
@@ -10,7 +10,9 @@ SRC_NAME =	vector_matrix_multiply.c \
 			vector_dot_product.c \
 			vector_length.c \
 			vector_normalise.c \
-			vector_cross_product.c
+			vector_cross_product.c \
+			matrix_make_identity.c \
+			matrix_rotate_x.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 
