@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/05 17:43:51 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/10 17:05:28 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define FILL_COORD(C, X, Y) C.x = X, C.y = Y
 # define FILL_RGB(RGB, R, G, B) RGB.r = R, RGB.g = G, RGB.b = B
 # include "../libft/includes/libft.h"
+# include "../libvec/includes/libvec.h"
 # include <mlx.h>
 # include <math.h>
 //REMOVE
@@ -72,6 +73,8 @@ typedef struct	s_environment
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_mlx_image	img;
+	t_coord		*coords;
+	t_map_data	map_data;
 }				t_environment;
 
 /*
@@ -79,7 +82,8 @@ typedef struct	s_environment
 */
 
 void			draw_line(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb);
-t_coord			ndc_to_screen_space(t_coord coord);
+void			draw_faces(t_environment *env, t_rgb rgb);
+t_coord			ndc_to_screen_spaqce(t_coord coord);
 int				rgbtoi(int r, int g, int b);
 
 /*
@@ -104,7 +108,7 @@ void			handle_hooks(void *win_ptr, t_environment *env);
 **Coords
 */
 
-void			malloc_coords(int fd, t_coord **coords, t_map_data *map_data);
-t_coord			*get_coords(int fd, t_coord *coords);
-void			handle_coords(int ac, char **av);
+void			malloc_coords(int fd, t_environment *env);
+void			get_coords(int fd, t_environment *env);
+void			handle_coords(int ac, char **av, t_environment *env);
 #endif

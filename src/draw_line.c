@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:26:45 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/05 16:30:10 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/10 16:07:26 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,29 @@ void		draw_line(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
 		draw_line_upper(c1, c2, img, rgb);
 	else
 		draw_line_lower(c1, c2, img, rgb);
+}
+
+void		draw_faces(t_environment *env, t_rgb rgb)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 1;
+	while (i < env->map_data.coord_count)
+	{
+		if (j < env->map_data.x_coords)
+			draw_line(env->coords[i], env->coords[i + 1], &env->img, rgb);
+		else
+			j = 0;
+		i++;
+		j++;
+	}
+	i = 0;
+	while (i < env->map_data.coord_count - env->map_data.x_coords)
+	{
+		draw_line(env->coords[i], env->coords[i + env->map_data.x_coords],
+			&env->img, rgb);
+		i++;
+	}
 }
