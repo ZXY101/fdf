@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:13:27 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/05 16:29:30 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/12 11:17:48 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,17 @@ int		rgbtoi(int r, int g, int b)
 		b = 0;
 	rgb = 0x010000 * r + 0x000100 * g + b;
 	return (rgb);
+}
+
+/*
+**Update the 3D model
+*/
+
+void	update_image(t_environment *env)
+{
+	t_rgb rgb;
+	FILL_RGB(rgb, 200, 0, 255);
+	clear_image(&env->img, 0x000000);
+	draw_faces(env,rgb);
+	put_image(env, &env->img);
 }

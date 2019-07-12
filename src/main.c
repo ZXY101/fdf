@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:29:55 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/10 17:28:00 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/12 12:27:02 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,39 +26,37 @@ int		main(int ac, char **av)
 	"fdf");
 	init_image(&env, &env.img, WINDOW_LENGTH, WINDOW_HEIGHT);
 	handle_coords(ac, av, &env);
-	////
-	t_vector v;
-	t_matrix mx,my,mz,mm, mp;
+	
+	t_vector v, vo;
+	t_matrix mx,my,mz,mp,mt,wm;
 	mx = matrix_rotate_x(1);
-	my = matrix_rotate_y(-1);
-	mz = matrix_rotate_z(1);
-	mm = matrix_matrix_multiply(mx,my);
+	my = matrix_rotate_y(1);
+	mz = matrix_rotate_z(1.5);
 	mp = matrix_projection(70, WINDOW_LENGTH/WINDOW_HEIGHT, 1, 100);
-	(void)mx;
-	(void)my;
-	(void)mz;
-	(void)mm;
-	(void)mp;
+	mt = matrix_translate(0, 0, 4);
+	wm = matrix_make_identity();
+	wm = matrix_matrix_multiply(mz, mx);
+	wm = matrix_matrix_multiply(wm, mt);
+	FILL_VECTOR(vo, 1,1,0,1);
 	int i = 0;
 	while (i < env.map_data.coord_count)
 	{
-		FILL_VECTOR(v, env.coords[i].x,env.coords[i].y,env.coords[i].z,1);
-		v = vector_multiply(v, 1);
-		v = matrix_vector_multiply(v, mx);
-		v = matrix_vector_multiply(v, my);
-		//v = matrix_vector_multiply(v, mz);
-		//v = matrix_vector_multiply(v, mm);
+		FILL_VECTOR(v, env.coords[i].x ,env.coords[i].y ,env.coords[i].z,1);
+		v = vector_multiply(v, 0.5);
+		v = matrix_vector_multiply(v, wm);
 		v = matrix_vector_multiply(v, mp);
-		FILL_COORD(env.coords[i], v.x+200, v.y+300);
+
+		v = vector_divide(v, v.w);
+		
+		v = vector_add(v, vo);
+		
+		FILL_COORD(env.coords[i], v.x, v.y);
+		env.coords[i] = ndc_to_screen_space(env.coords[i]);
 		i++;
 	}
-	i = 0;
-	t_rgb rgb;
-	FILL_RGB(rgb, 255,0,50);
-		//pixel_put_image(&env.img, 0xffffff, env.coords[i].x, env.coords[i].y);
-		draw_faces(&env, rgb);
-		put_image(&env, &env.img);
-	////
+	update_image(&env);
+	
+	
 	handle_hooks(env.win_ptr, &env);
 	mlx_loop(env.mlx_ptr);
 	return (0);

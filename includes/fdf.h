@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/10 17:05:28 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/12 12:27:11 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ typedef struct	s_environment
 
 void			draw_line(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb);
 void			draw_faces(t_environment *env, t_rgb rgb);
-t_coord			ndc_to_screen_spaqce(t_coord coord);
+t_coord			ndc_to_screen_space(t_coord coord);
 int				rgbtoi(int r, int g, int b);
+void			update_image(t_environment *env);
 
 /*
 **Images
@@ -100,7 +101,7 @@ void			put_image(t_environment *env, t_mlx_image *img);
 **Hooks
 */
 
-int				key_input(int key, void *param);
+int				key_input(int key, t_environment *env);
 int				finish(void *none);
 void			handle_hooks(void *win_ptr, t_environment *env);
 
