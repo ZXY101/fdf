@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:59:01 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/12 12:27:44 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/12 13:21:00 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,11 @@ int		key_input(int key, t_environment *env)
 		while (i < env->map_data.coord_count)
 		{
 			FILL_VECTOR(v, env->coords[i].x ,env->coords[i].y,env->coords[i].z,1);
-
 			v = matrix_vector_multiply(v, mt);
-
-			FILL_COORD(env->coords[i], v.x, v.y);
+			 FILL_COORD(env->coords[i], v.x, v.y, v.z);
 
 			i++;
 		}
-			printf("%f\n", v.x);
 
 		update_image(env);
 	}
@@ -61,7 +58,7 @@ int		key_input(int key, t_environment *env)
 			v = matrix_vector_multiply(v, mt);
 
 
-			FILL_COORD(env->coords[i], v.x, v.y);
+		FILL_COORD(env->coords[i], v.x, v.y, v.z);
 
 			i++;
 		}
@@ -80,7 +77,7 @@ int		key_input(int key, t_environment *env)
 		{
 			FILL_VECTOR(v, env->coords[i].x ,env->coords[i].y,env->coords[i].z,1);
 			v = matrix_vector_multiply(v, mt);
-			FILL_COORD(env->coords[i], v.x, v.y);
+		FILL_COORD(env->coords[i], v.x, v.y, v.z);
 
 			i++;
 		}
@@ -100,7 +97,7 @@ int		key_input(int key, t_environment *env)
 			v = matrix_vector_multiply(v, mt);
 
 
-			FILL_COORD(env->coords[i], v.x, v.y);
+		FILL_COORD(env->coords[i], v.x, v.y, v.z);
 
 			i++;
 		}

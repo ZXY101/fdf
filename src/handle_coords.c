@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/05 15:53:17 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/12 12:25:48 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/12 13:29:22 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void		get_coords(int fd, t_environment *env)
 			env->coords[map_data.coord_count] = coord;
 			map_data.x_coords++;
 			map_data.coord_count++;
+			
 		}
 		map_data.y_coords++;
 		free(map_data.line_split);

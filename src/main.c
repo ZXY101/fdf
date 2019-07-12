@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:29:55 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/12 12:27:02 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/12 13:34:06 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		main(int ac, char **av)
 		
 		v = vector_add(v, vo);
 		
-		FILL_COORD(env.coords[i], v.x, v.y);
+		FILL_COORD(env.coords[i], v.x, v.y, v.z);
 		env.coords[i] = ndc_to_screen_space(env.coords[i]);
 		i++;
 	}

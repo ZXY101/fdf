@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/12 12:27:11 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/12 13:05:34 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FDF_H
 # define WINDOW_LENGTH 1000
 # define WINDOW_HEIGHT 600
-# define FILL_COORD(C, X, Y) C.x = X, C.y = Y
+# define FILL_COORD(C, X, Y, Z) C.x = X, C.y = Y, C.z = Z
 # define FILL_RGB(RGB, R, G, B) RGB.r = R, RGB.g = G, RGB.b = B
 # include "../libft/includes/libft.h"
 # include "../libvec/includes/libvec.h"

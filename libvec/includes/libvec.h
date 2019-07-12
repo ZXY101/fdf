@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:56:29 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/12 12:20:48 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/12 13:28:31 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ t_matrix		matrix_translate(double x, double y, double z);
 t_matrix		matrix_projection(double fov, double a_r,
 				double near, double far);
 t_matrix		matrix_matrix_multiply(t_matrix m1, t_matrix m2);
+void			init_to_zero(t_matrix *m);
+
 
 #endif
