@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:26:45 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/11 10:16:38 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/15 12:17:42 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,18 @@ void		draw_line(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
 		draw_line_lower(c1, c2, img, rgb);
 }
 
+int			is_in_window(t_coord *coords, int i, int j)
+{
+	int ret;
+
+	ret = coords[i].x > 0 && coords[i].x < WINDOW_LENGTH &&
+	coords[i].y > 0 && coords[i].y < WINDOW_HEIGHT &&
+	coords[j].x > 0 && coords[j].x < WINDOW_LENGTH &&
+	coords[j].y > 0 && coords[j].y < WINDOW_HEIGHT
+	? 1 : 0;
+	return (ret);
+}
+
 void		draw_faces(t_environment *env, t_rgb rgb)
 {
 	int i;
@@ -97,7 +109,10 @@ void		draw_faces(t_environment *env, t_rgb rgb)
 	while (i < env->map_data.coord_count)
 	{
 		if (j < env->map_data.x_coords)
-			draw_line(env->coords[i], env->coords[i + 1], &env->img, rgb);
+		{
+			if (is_in_window(env->coords, i, i + 1))
+				draw_line(env->coords[i], env->coords[i + 1], &env->img, rgb);
+		}
 		else
 			j = 0;
 		i++;
@@ -106,8 +121,9 @@ void		draw_faces(t_environment *env, t_rgb rgb)
 	i = 0;
 	while (i < env->map_data.coord_count - env->map_data.x_coords)
 	{
-		draw_line(env->coords[i], env->coords[i + env->map_data.x_coords],
-			&env->img, rgb);
+		if (is_in_window(env->coords, i, i + env->map_data.x_coords) == 1)
+			draw_line(env->coords[i], env->coords[i + env->map_data.x_coords],
+		&env->img, rgb);
 		i++;
 	}
 }

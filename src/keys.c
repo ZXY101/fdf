@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_projection.c                                :+:      :+:    :+:   */
+/*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 14:45:25 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/12 14:03:22 by stenner          ###   ########.fr       */
+/*   Created: 2019/07/15 11:32:08 by stenner           #+#    #+#             */
+/*   Updated: 2019/07/15 11:36:20 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libvec.h"
+#include "../includes/fdf.h"
 
-t_matrix	matrix_projection(double fov, double a_r, double near, double far)
+void	arrow_keys(int key, t_environment *env)
 {
-	t_matrix m;
-	double fov_rad;
+	enum e_translate t;
 
-	init_to_zero(&m);
-	fov_rad = 1 / tan(fov * 0.5 / 180 * 3.14159);
-	m.m[0][0] = a_r * fov_rad;
-	m.m[1][1] = fov_rad;
-	m.m[2][2] = far / (far - near);
-	m.m[3][2] = (-far * near) / (far - near);
-	m.m[2][3] = 1;
-	m.m[3][3] = 0;
-	return (m);
+	if (key == 123)
+	{
+		t = left;
+		map_translate(env, t);
+	}
+	if (key == 124)
+	{
+		t = right;
+		map_translate(env, t);
+	}
+	if (key == 125)
+	{
+		t = down;
+		map_translate(env, t);
+	}
+	if (key == 126)
+	{
+		t = up;
+		map_translate(env, t);
+	}
 }

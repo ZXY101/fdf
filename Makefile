@@ -6,7 +6,7 @@
 #    By: stenner <stenner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/27 17:28:44 by stenner           #+#    #+#              #
-#    Updated: 2019/07/10 13:05:05 by stenner          ###   ########.fr        #
+#    Updated: 2019/07/15 11:38:18 by stenner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,13 +23,14 @@ SRC_NAME =	main.c \
 			images.c \
 			gfx_utility.c \
 			handle_hooks.c \
-			handle_coords.c
+			handle_coords.c \
+			keys.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 
 SRCO = $(patsubst %.c, %.o, $(SRC))
 
-MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
+MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit -lm
 MLX_LFLAGS =  -lmlx -lXext -lX11 -lm
 
 FLAGS = -Wall -Werror -Wextra

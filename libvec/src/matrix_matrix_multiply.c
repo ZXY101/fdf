@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:58:32 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/10 15:39:17 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/12 14:03:05 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_matrix	matrix_matrix_multiply(t_matrix m1, t_matrix m2)
 	int r;
 	int c;
 
+	init_to_zero(&m);
 	c = 0;
 	while (c < 4)
 	{

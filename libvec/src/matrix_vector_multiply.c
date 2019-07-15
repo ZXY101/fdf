@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 11:17:45 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/12 13:12:39 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/12 14:04:06 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_vector	matrix_vector_multiply(t_vector v, t_matrix m)
 {
 	t_vector ret;
 
-	
 	ret.x = v.x * m.m[0][0] + v.y * m.m[1][0] +
 	v.z * m.m[2][0] + m.m[3][0];
 	ret.y = v.x * m.m[0][1] + v.y * m.m[1][1] +

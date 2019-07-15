@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/12 13:05:34 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/15 11:35:35 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@
 # include <math.h>
 //REMOVE
 # include <stdio.h>
+
+enum	e_translate
+{
+	left,
+	right,
+	up,
+	down
+};
 
 typedef struct	s_map_data
 {
@@ -86,6 +94,7 @@ void			draw_faces(t_environment *env, t_rgb rgb);
 t_coord			ndc_to_screen_space(t_coord coord);
 int				rgbtoi(int r, int g, int b);
 void			update_image(t_environment *env);
+void			map_translate(t_environment *env, enum e_translate t);
 
 /*
 **Images
@@ -104,6 +113,12 @@ void			put_image(t_environment *env, t_mlx_image *img);
 int				key_input(int key, t_environment *env);
 int				finish(void *none);
 void			handle_hooks(void *win_ptr, t_environment *env);
+
+/*
+**Keys
+*/
+
+void			arrow_keys(int key, t_environment *env);
 
 /*
 **Coords

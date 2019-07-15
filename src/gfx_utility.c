@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:13:27 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/12 13:33:25 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/15 11:45:07 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,38 @@ int		rgbtoi(int r, int g, int b)
 void	update_image(t_environment *env)
 {
 	t_rgb rgb;
+
 	FILL_RGB(rgb, 200, 0, 255);
 	clear_image(&env->img, 0x000000);
-	draw_faces(env,rgb);
+	draw_faces(env, rgb);
 	put_image(env, &env->img);
+}
+
+/*
+**Move the 3D Model
+*/
+
+void	map_translate(t_environment *env, enum e_translate t)
+{
+	t_vector	v;
+	t_matrix	tm;
+	int			i;
+
+	i = 0;
+	if (t == left)
+		tm = matrix_translate(100, 0, 0);
+	else if (t == right)
+		tm = matrix_translate(-100, 0, 0);
+	else if (t == up)
+		tm = matrix_translate(0, 100, 0);
+	else if (t == down)
+		tm = matrix_translate(0, -100, 0);
+	while (i < env->map_data.coord_count)
+	{
+		FILL_VECTOR(v, env->coords[i].x, env->coords[i].y, env->coords[i].z, 1);
+		v = matrix_vector_multiply(v, tm);
+		FILL_COORD(env->coords[i], v.x, v.y, v.z);
+		i++;
+	}
+	update_image(env);
 }
