@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:13:27 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/15 11:45:07 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/15 14:17:02 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	update_image(t_environment *env)
 {
 	t_rgb rgb;
 
-	FILL_RGB(rgb, 200, 0, 255);
+	FILL_RGB(rgb, 0, 200, 255);
 	clear_image(&env->img, 0x000000);
 	draw_faces(env, rgb);
 	put_image(env, &env->img);

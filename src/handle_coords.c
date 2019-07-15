@@ -6,13 +6,32 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/05 15:53:17 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/12 13:29:22 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/15 14:18:14 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void		malloc_coords(int fd, t_environment *env)
+static void	erro_call(int error)
+{
+	if (error == 0)
+	{
+		ft_putendl("Invalid map.");
+		exit(0);
+	}
+	if (error == 1)
+	{
+		ft_putendl("Not enough arguments.");
+		exit(0);
+	}
+	if (error == 2)
+	{
+		ft_putendl("Too many arguments.");
+		exit(0);
+	}
+}
+
+static void	malloc_coords(int fd, t_environment *env)
 {
 	env->map_data.coord_count = 0;
 	env->map_data.x_coords = 0;
@@ -32,10 +51,7 @@ void		malloc_coords(int fd, t_environment *env)
 		if (env->map_data.i == env->map_data.coord_count)
 			env->map_data.x_coords = env->map_data.i;
 		if (env->map_data.x_coords != env->map_data.i)
-		{
-			ft_putendl("Invalid map");
-			exit(2);
-		}
+			erro_call(0);
 		free(env->map_data.line_split);
 		free(env->map_data.line);
 	}
@@ -56,7 +72,6 @@ void		get_coords(int fd, t_environment *env)
 		map_data.line_split = ft_strsplit(map_data.line, ' ');
 		while (map_data.line_split[map_data.x_coords])
 		{
-			
 			coord.x = map_data.x_coords;
 			coord.y = map_data.y_coords;
 			coord.z = ft_atoi(map_data.line_split[map_data.x_coords]);
@@ -64,7 +79,6 @@ void		get_coords(int fd, t_environment *env)
 			env->coords[map_data.coord_count] = coord;
 			map_data.x_coords++;
 			map_data.coord_count++;
-			
 		}
 		map_data.y_coords++;
 		free(map_data.line_split);
@@ -77,26 +91,21 @@ void		handle_coords(int ac, char **av, t_environment *env)
 	int			fd;
 
 	if (ac < 2)
-	{
-		ft_putendl("Not enough arguments.");
-		exit(0);
-	}
+		erro_call(1);
+	else if (ac > 2)
+		erro_call(2);
+	if (!ft_strstr(av[1], ".fdf\0"))
+		erro_call(0);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-	{
-		ft_putendl("Invalid map");
-		exit(2);
-	}
+		erro_call(0);
 	malloc_coords(fd, env);
 	if (close(fd) == -1)
-		exit(0);
+		erro_call(0);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-	{
-		ft_putendl("Invalid map");
-		exit(2);
-	}
+		erro_call(0);
 	get_coords(fd, env);
 	if (close(fd) == -1)
-		exit(0);
+		erro_call(0);
 }

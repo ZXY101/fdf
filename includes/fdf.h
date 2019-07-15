@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/15 11:35:35 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/15 14:28:05 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,11 @@ void			handle_hooks(void *win_ptr, t_environment *env);
 */
 
 void			arrow_keys(int key, t_environment *env);
+void			zoom(int key, t_environment *env);
 
 /*
 **Coords
 */
 
-void			malloc_coords(int fd, t_environment *env);
 void			get_coords(int fd, t_environment *env);
-void			handle_coords(int ac, char **av, t_environment *env);
 #endif
