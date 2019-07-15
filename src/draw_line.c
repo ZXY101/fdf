@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:26:45 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/15 14:16:40 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/15 16:52:56 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 **Line drawing algorithm for when m < 1
 */
 
-static void	draw_line_lower(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
+static void	draw_line_lower(t_vector c1, t_vector c2, t_mlx_image *img, t_rgb rgb)
 {
 	int			i;
 	t_line_math l;
 
 	if (c1.x > c2.x)
-		ft_swap(&c1, &c2, sizeof(t_coord));
+		ft_swap(&c1, &c2, sizeof(t_vector));
 	l.delta_x = c2.x - c1.x;
 	l.delta_y = c2.y - c1.y;
 	l.grad = l.delta_y / (double)l.delta_x;
@@ -47,13 +47,13 @@ static void	draw_line_lower(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
 **Line drawing algorithm for when m > 1
 */
 
-static void	draw_line_upper(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
+static void	draw_line_upper(t_vector c1, t_vector c2, t_mlx_image *img, t_rgb rgb)
 {
 	int			i;
 	t_line_math l;
 
 	if (c1.y > c2.y)
-		ft_swap(&c1, &c2, sizeof(t_coord));
+		ft_swap(&c1, &c2, sizeof(t_vector));
 	l.delta_x = c2.x - c1.x;
 	l.delta_y = c2.y - c1.y;
 	l.grad = l.delta_x / (double)l.delta_y;
@@ -74,7 +74,7 @@ static void	draw_line_upper(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
 **Check to see which algorithm to use
 */
 
-void		draw_line(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
+void		draw_line(t_vector c1, t_vector c2, t_mlx_image *img, t_rgb rgb)
 {
 	int			delta_x;
 	int			delta_y;
@@ -87,7 +87,7 @@ void		draw_line(t_coord c1, t_coord c2, t_mlx_image *img, t_rgb rgb)
 		draw_line_lower(c1, c2, img, rgb);
 }
 
-int			is_in_window(t_coord *coords, int i, int j)
+int			is_in_window(t_vector *coords, int i, int j)
 {
 	int ret;
 
@@ -110,8 +110,8 @@ void		draw_faces(t_environment *env, t_rgb rgb)
 	{
 		if (j < env->map_data.x_coords)
 		{
-			if (is_in_window(env->coords, i, i + 1))
-				draw_line(env->coords[i], env->coords[i + 1], &env->img, rgb);
+			if (is_in_window(env->vectors, i, i + 1))
+				draw_line(env->vectors[i], env->vectors[i + 1], &env->img, rgb);
 		}
 		else
 			j = 0;
@@ -121,8 +121,8 @@ void		draw_faces(t_environment *env, t_rgb rgb)
 	i = 0;
 	while (i < env->map_data.coord_count - env->map_data.x_coords)
 	{
-		if (is_in_window(env->coords, i, i + env->map_data.x_coords) == 1)
-			draw_line(env->coords[i], env->coords[i + env->map_data.x_coords],
+		if (is_in_window(env->vectors, i, i + env->map_data.x_coords) == 1)
+			draw_line(env->vectors[i], env->vectors[i + env->map_data.x_coords],
 			&env->img, rgb);
 		i++;
 	}

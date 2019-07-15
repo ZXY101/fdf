@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 11:32:08 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/15 14:29:56 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/15 18:06:23 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,20 @@ void	arrow_keys(int key, t_environment *env)
 		t = up;
 		map_translate(env, t);
 	}
+}
+
+void	rgb_keys(t_environment *env)
+{
+	if (env->keys[83] && env->rgb.r < 255)
+		env->rgb.r = env->rgb.r + 15;
+	if (env->keys[84] && env->rgb.g < 255)
+		env->rgb.g= env->rgb.g + 15;
+	if (env->keys[85] && env->rgb.b < 255)
+		env->rgb.b = env->rgb.b + 15;
+	if (env->keys[86] && env->rgb.r > 0)
+		env->rgb.r = env->rgb.r - 15;
+	if (env->keys[87] && env->rgb.g > 0)
+		env->rgb.g= env->rgb.g - 15;
+	if (env->keys[88] && env->rgb.b > 0)
+		env->rgb.b = env->rgb.b - 15;
 }

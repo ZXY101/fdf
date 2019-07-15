@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:13:27 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/15 14:17:02 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/15 18:27:33 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 **Function to convert Normalised Device Coordinates to screen space
 */
 
-t_coord	ndc_to_screen_space(t_coord coord)
+t_vector	ndc_to_screen_space(t_vector coord)
 {
-	t_coord ret;
+	t_vector ret;
 
 	ret = coord;
 	ret.x /= 2;
@@ -63,14 +63,48 @@ int		rgbtoi(int r, int g, int b)
 **Update the 3D model
 */
 
+void	apply_transforms(t_environment *env)
+{
+	t_matrix mvp;
+	t_matrix model;
+	t_matrix scale_mat;
+	t_matrix trans_mat;
+
+	int i;
+
+	model = matrix_rotate(env->rotation);
+	scale_mat = matrix_scale(env->scale);
+	model = matrix_matrix_multiply(model, scale_mat);
+	trans_mat = matrix_translate(env->translation);
+	model = matrix_matrix_multiply(model, trans_mat);
+	mvp = matrix_make_identity();
+	mvp = matrix_matrix_multiply(mvp, model);
+	// scale_mat = matrix_projection(90, WINDOW_LENGTH / (double)WINDOW_HEIGHT, 0.00001, 10000);
+	// mvp = matrix_matrix_multiply(mvp, scale_mat);
+	
+	i = 0;
+	while (i < env->map_data.coord_count)
+	{
+		env->vectors[i] = matrix_vector_multiply(env->coords[i], mvp);
+		i++;
+	}
+}
+
 void	update_image(t_environment *env)
 {
-	t_rgb rgb;
-
-	FILL_RGB(rgb, 0, 200, 255);
 	clear_image(&env->img, 0x000000);
-	draw_faces(env, rgb);
+	apply_transforms(env);
+	draw_faces(env, env->rgb);
 	put_image(env, &env->img);
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 5,
+	rgbtoi(env->rgb.r, env->rgb.g, env->rgb.b), env->map_name);
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 30, 0xff0f0f, "R:");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 30, 30, 0xff0f0f, ft_itoa(env->rgb.r));
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 50, 0x0fff0f, "G:");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 30, 50, 0x0fff0f, ft_itoa(env->rgb.g));
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 70, 0x0f0fff, "B:");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 30, 70, 0x0f0fff, ft_itoa(env->rgb.b));
+
 }
 
 /*
@@ -79,7 +113,7 @@ void	update_image(t_environment *env)
 
 void	map_translate(t_environment *env, enum e_translate t)
 {
-	t_vector	v;
+/* 	t_vector	v;
 	t_matrix	tm;
 	int			i;
 
@@ -99,5 +133,7 @@ void	map_translate(t_environment *env, enum e_translate t)
 		FILL_COORD(env->coords[i], v.x, v.y, v.z);
 		i++;
 	}
-	update_image(env);
+	update_image(env); */
+	(void)env;
+	(void)t;
 }
