@@ -12,8 +12,8 @@
 
 #ifndef FDF_H
 # define FDF_H
-# define WINDOW_LENGTH 1000
-# define WINDOW_HEIGHT 600
+# define WINDOW_LENGTH 1920
+# define WINDOW_HEIGHT 1080
 # define FILL_COORD(C, X, Y, Z) C.x = X, C.y = Y, C.z = Z
 # define FILL_RGB(RGB, R, G, B) RGB.r = R, RGB.g = G, RGB.b = B
 # include "../libft/includes/libft.h"
@@ -85,10 +85,7 @@ typedef struct	s_environment
 	int			keys[512];
 	int			buttons[10];
 	int			auto_rotate;
-	int			ox;
-	int			oy;
-	int			nx;
-	int			ny;
+	int			auto_rotate_dir;
 }				t_environment;
 
 /*

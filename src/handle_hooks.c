@@ -27,6 +27,10 @@ int		key_down(int key, t_environment *env)
 		exit(0);
 	if (key == 49)
 		env->auto_rotate *= -1;
+	if (key == 78)
+		env->auto_rotate_dir = 1;
+	if (key == 69)
+		env->auto_rotate_dir = -1;
 	env->keys[key] = 1;
 	return (0);
 }
@@ -41,9 +45,6 @@ int		mouse_down(int key, int x, int y, t_environment *env)
 {
 	(void)x;
 	(void)y;
-	env->ox = x;
-	env->oy = y;
-	env->buttons[key] = 1;
 
 	if (key == 4)
 	{
@@ -56,14 +57,6 @@ int		mouse_down(int key, int x, int y, t_environment *env)
 		env->scale.w = 1;
 	}
 
-	return (0);
-}
-
-int		mouse_move(int key, int x, int y, t_environment *env)
-{
-	(void)key;
-	env->nx = x;
-	env->ny = y;
 	return (0);
 }
 
@@ -105,13 +98,13 @@ int fun(t_environment *env)
 		env->rotation.z -= 5;
 
 	if (env->keys[123])
-		env->translation.x += 5;
-	if (env->keys[124])
 		env->translation.x -= 5;
+	if (env->keys[124])
+		env->translation.x += 5;
 	if (env->keys[126])
-		env->translation.y += 5;
-	if (env->keys[125])
 		env->translation.y -= 5;
+	if (env->keys[125])
+		env->translation.y += 5;
 
 
 	if (env->keys[24])
@@ -125,12 +118,12 @@ int fun(t_environment *env)
 		env->scale.w = 1;
 	}
 	if (env->auto_rotate == 1)
-		env->rotation.y++;
-	if (env->buttons[1])
-		{
-			env->rotation.x += env->ox - env->nx;
-			env->rotation.y += env->oy - env->ny;
-		}
+	{
+		if (env->auto_rotate_dir == 1)
+			env->rotation.y++;
+		else if (env->auto_rotate_dir == -1)
+			env->rotation.y--;
+	}	
 	rgb_keys(env);
 	update_image(env);
 	return 0;
@@ -142,8 +135,6 @@ void	handle_hooks(void *win_ptr, t_environment *env)
 	mlx_hook(win_ptr, 3, 0L, key_release, env);
 	mlx_hook(win_ptr, 4, 0L, mouse_down, env);
 	mlx_hook(win_ptr, 5, 0L, mouse_release, env);
-	if (env->buttons[1])
-		mlx_hook(win_ptr, 6, 0L, mouse_move, env);
 	mlx_hook(win_ptr, 17, 0L, finish, env);
 	mlx_loop_hook(env->mlx_ptr, fun, env);
 }

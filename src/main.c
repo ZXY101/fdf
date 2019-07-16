@@ -21,7 +21,8 @@ int		main(int ac, char **av)
 	env.mlx_ptr = mlx_init();
 	env.win_ptr = mlx_new_window(env.mlx_ptr, WINDOW_LENGTH, WINDOW_HEIGHT,
 	"fdf");
-	env.auto_rotate = 1;
+	env.auto_rotate = -1;
+	env.auto_rotate_dir = 1;
 	init_image(&env, &env.img, WINDOW_LENGTH, WINDOW_HEIGHT);
 	FILL_RGB(env.rgb, 255, 255, 255);
 	FILL_VECTOR(env.rotation, 45 ,0 ,0 ,1);
