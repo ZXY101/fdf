@@ -61,15 +61,15 @@ void	arrow_keys(int key, t_environment *env)
 void	rgb_keys(t_environment *env)
 {
 	if (env->keys[83] && env->rgb.r < 255)
-		env->rgb.r = env->rgb.r + 15;
+		env->rgb.r = env->rgb.r + 5;
 	if (env->keys[84] && env->rgb.g < 255)
-		env->rgb.g= env->rgb.g + 15;
+		env->rgb.g= env->rgb.g + 5;
 	if (env->keys[85] && env->rgb.b < 255)
-		env->rgb.b = env->rgb.b + 15;
+		env->rgb.b = env->rgb.b + 5;
 	if (env->keys[86] && env->rgb.r > 0)
-		env->rgb.r = env->rgb.r - 15;
+		env->rgb.r = env->rgb.r - 5;
 	if (env->keys[87] && env->rgb.g > 0)
-		env->rgb.g= env->rgb.g - 15;
+		env->rgb.g= env->rgb.g - 5;
 	if (env->keys[88] && env->rgb.b > 0)
-		env->rgb.b = env->rgb.b - 15;
+		env->rgb.b = env->rgb.b - 5;
 }

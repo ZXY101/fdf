@@ -83,6 +83,12 @@ typedef struct	s_environment
 	t_vector	scale;
 	t_vector	translation;
 	int			keys[512];
+	int			buttons[10];
+	int			auto_rotate;
+	int			ox;
+	int			oy;
+	int			nx;
+	int			ny;
 }				t_environment;
 
 /*
