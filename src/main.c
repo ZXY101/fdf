@@ -23,6 +23,7 @@ int		main(int ac, char **av)
 	"fdf");
 	env.auto_rotate = -1;
 	env.auto_rotate_dir = 1;
+	env.speed = 5;
 	init_image(&env, &env.img, WINDOW_LENGTH, WINDOW_HEIGHT);
 	FILL_RGB(env.rgb, 255, 255, 255);
 	FILL_VECTOR(env.rotation, 45 ,0 ,0 ,1);

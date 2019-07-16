@@ -31,6 +31,10 @@ int		key_down(int key, t_environment *env)
 		env->auto_rotate_dir = 1;
 	if (key == 69)
 		env->auto_rotate_dir = -1;
+	if (key == 82)
+		FILL_RGB(env->rgb, 255, 255, 255);
+	if (key == 65)
+		FILL_RGB(env->rgb, 0, 0, 0);
 	env->keys[key] = 1;
 	return (0);
 }
@@ -84,37 +88,50 @@ int		finish(void *none)
 
 int fun(t_environment *env)
 {
+	if (env->keys[257])
+		env->speed = 14;
+	else
+		env->speed = 5;
+	
+
 	if (env->keys[0])
-		env->rotation.y += 5;
+		env->rotation.y += env->speed;
 	if (env->keys[2])
-		env->rotation.y -= 5;
+		env->rotation.y -= env->speed;
 	if (env->keys[13])
-		env->rotation.x += 5;
+		env->rotation.x += env->speed;
 	if (env->keys[1])
-		env->rotation.x -= 5;
+		env->rotation.x -= env->speed;
 	if (env->keys[14])
-		env->rotation.z += 5;
+		env->rotation.z += env->speed;
 	if (env->keys[12])
-		env->rotation.z -= 5;
+		env->rotation.z -= env->speed;
 
 	if (env->keys[123])
-		env->translation.x -= 5;
+		env->translation.x -= env->speed;
 	if (env->keys[124])
-		env->translation.x += 5;
+		env->translation.x += env->speed;
 	if (env->keys[126])
-		env->translation.y -= 5;
+		env->translation.y -= env->speed;
 	if (env->keys[125])
-		env->translation.y += 5;
+		env->translation.y += env->speed;
 
 
 	if (env->keys[24])
 	{
-		env->scale = vector_multiply(env->scale, 1.1);
+		if (env->keys[257])
+			env->scale = vector_multiply(env->scale, 1.1);
+		else
+			env->scale = vector_multiply(env->scale, 1.05);
 		env->scale.w = 1;
 	}
 	if (env->keys[27])
 	{
-		env->scale = vector_multiply(env->scale, 0.9);
+		if (env->keys[257])
+			env->scale = vector_multiply(env->scale, 0.9);
+		else
+			env->scale = vector_multiply(env->scale, 0.95);
+		
 		env->scale.w = 1;
 	}
 	if (env->auto_rotate == 1)
