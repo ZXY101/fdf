@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:13:27 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 12:37:26 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 14:30:38 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,26 @@
 */
 
 #include "../includes/fdf.h"
+
+/*
+**Set Starting size
+*/
+
+void		starting_scale(t_environment *env)
+{
+	if (env->map_data.coord_count < 250)
+		FILL_VECTOR(env->scale, 30, 30, 30, 1);
+	else if (env->map_data.coord_count < 500)
+		FILL_VECTOR(env->scale, 25, 25, 25, 1);
+	else if (env->map_data.coord_count < 750)
+		FILL_VECTOR(env->scale, 20, 20, 20, 1);
+	else if (env->map_data.coord_count < 1500)
+		FILL_VECTOR(env->scale, 15, 15, 10, 1);
+	else if (env->map_data.coord_count < 50000)
+		FILL_VECTOR(env->scale, 5, 5, 5, 1);
+	else
+		FILL_VECTOR(env->scale, 2, 2, 2, 1);
+}
 
 /*
 **Function to convert Normalised Device Coordinates to screen space

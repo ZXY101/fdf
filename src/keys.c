@@ -6,11 +6,25 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 11:32:08 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 11:52:33 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 14:05:00 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+void	fixed_rotate(int key, t_environment *env)
+{
+	if (key == 50)
+	{
+		env->rotation.x = 0;
+		env->rotation.y = 0;
+		env->rotation.z = 0;
+		env->rotation.z = 0;
+	}
+	env->rotation.x += key == 18 ? 90 : 0;
+	env->rotation.y += key == 19 ? 90 : 0;
+	env->rotation.z += key == 20 ? 90 : 0;
+}
 
 void	rotate_keys(t_environment *env)
 {

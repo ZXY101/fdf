@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 11:36:31 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 14:23:31 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void			draw_faces(t_environment *env, t_rgb rgb);
 t_vector		ndc_to_screen_space(t_vector coord);
 int				rgbtoi(int r, int g, int b);
 void			update_image(t_environment *env);
+void			starting_scale(t_environment *env);
 
 /*
 **Images
@@ -118,6 +119,7 @@ int				key_down(int key, t_environment *env);
 int				key_release(int key, t_environment *env);
 int				mouse_down(int key, int x, int y, t_environment *env);
 int				mouse_release(int key, int x, int y, t_environment *env);
+void			fixed_rotate(int key, t_environment *env);
 
 /*
 **Coords

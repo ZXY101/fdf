@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:23:42 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 11:51:24 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 14:01:55 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		key_down(int key, t_environment *env)
 		FILL_RGB(env->rgb, 255, 255, 255);
 	if (key == 65)
 		FILL_RGB(env->rgb, 0, 0, 0);
+	fixed_rotate(key, env);
 	env->keys[key] = 1;
 	return (0);
 }
