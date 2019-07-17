@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 11:32:08 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 14:05:00 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 15:00:38 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,10 @@ void	rgb_keys(t_environment *env)
 	env->rgb.r -= env->keys[83] && env->rgb.r > 0 ? 5 : 0;
 	env->rgb.g -= env->keys[84] && env->rgb.g > 0 ? 5 : 0;
 	env->rgb.b -= env->keys[85] && env->rgb.b > 0 ? 5 : 0;
+	env->rgb.r = env->rgb.r > 255 ? 255 : env->rgb.r;
+	env->rgb.g = env->rgb.g > 255 ? 255 : env->rgb.g;
+	env->rgb.b = env->rgb.b > 255 ? 255 : env->rgb.b;
+	env->rgb.r = env->rgb.r < 0 ? 0 : env->rgb.r;
+	env->rgb.g = env->rgb.g < 0 ? 0 : env->rgb.g;
+	env->rgb.b = env->rgb.b < 0 ? 0 : env->rgb.b;
 }

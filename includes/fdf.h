@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 14:23:31 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 14:42:29 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ typedef struct	s_environment
 	int			buttons[10];
 	int			auto_rotate;
 	int			auto_rotate_dir;
+	int			colour_trip;
+	int			clearer;
 }				t_environment;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:13:27 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 14:30:38 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 14:44:41 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void		apply_transforms(t_environment *env)
 	t_matrix	trans_mat;
 	int			i;
 
+	if (env->clearer == 1)
+		clear_image(&env->img, 0x000000);
 	model = matrix_rotate(env->rotation);
 	scale_mat = matrix_scale(env->scale);
 	model = matrix_matrix_multiply(model, scale_mat);
@@ -112,7 +114,6 @@ void		update_image(t_environment *env)
 	char *val2;
 	char *val3;
 
-	clear_image(&env->img, 0x000000);
 	apply_transforms(env);
 	draw_faces(env, env->rgb);
 	put_image(env, &env->img);

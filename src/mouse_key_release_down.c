@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:23:42 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 14:01:55 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 14:45:09 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ int		key_down(int key, t_environment *env)
 		exit(0);
 	if (key == 49)
 		env->auto_rotate *= -1;
+	if (key == 36)
+		env->colour_trip *= -1;
+	if (key == 51)
+		env->clearer *= -1;
 	if (key == 78)
 		env->auto_rotate_dir = 1;
 	if (key == 69)

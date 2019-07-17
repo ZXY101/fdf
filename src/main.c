@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:29:55 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 14:23:45 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 14:44:44 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		main(int ac, char **av)
 	env.mlx_ptr = mlx_init();
 	env.win_ptr = mlx_new_window(env.mlx_ptr, WINDOW_LENGTH, WINDOW_HEIGHT,
 	"fdf");
+	env.colour_trip = -1;
+	env.clearer = 1;
 	env.auto_rotate = -1;
 	env.auto_rotate_dir = 1;
 	env.speed = 5;
