@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 11:35:51 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/10 14:42:55 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/15 17:01:31 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_matrix	matrix_make_identity(void)
 {
 	t_matrix m;
 
-
+	init_to_zero(&m);
 	m.m[0][0] = 1;
 	m.m[1][1] = 1;
 	m.m[2][2] = 1;

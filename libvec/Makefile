@@ -15,7 +15,9 @@ SRC_NAME =	matrix_vector_multiply.c \
 			matrix_rotate.c \
 			matrix_translate.c \
 			matrix_projection.c \
-			matrix_matrix_multiply.c
+			matrix_matrix_multiply.c \
+			matrix_scale.c \
+			init_to_zero.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 

@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:13:27 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/05 16:29:30 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 12:37:26 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 **Function to convert Normalised Device Coordinates to screen space
 */
 
-t_coord	ndc_to_screen_space(t_coord coord)
+t_vector	ndc_to_screen_space(t_vector coord)
 {
-	t_coord ret;
+	t_vector ret;
 
 	ret = coord;
 	ret.x /= 2;
@@ -39,7 +39,7 @@ t_coord	ndc_to_screen_space(t_coord coord)
 **Function to take 3 rgb values and returns a the colour integer
 */
 
-int		rgbtoi(int r, int g, int b)
+int			rgbtoi(int r, int g, int b)
 {
 	int rgb;
 
@@ -57,4 +57,60 @@ int		rgbtoi(int r, int g, int b)
 		b = 0;
 	rgb = 0x010000 * r + 0x000100 * g + b;
 	return (rgb);
+}
+
+/*
+**Update the 3D model
+*/
+
+void		apply_transforms(t_environment *env)
+{
+	t_matrix	mvp;
+	t_matrix	model;
+	t_matrix	scale_mat;
+	t_matrix	trans_mat;
+	int			i;
+
+	model = matrix_rotate(env->rotation);
+	scale_mat = matrix_scale(env->scale);
+	model = matrix_matrix_multiply(model, scale_mat);
+	trans_mat = matrix_translate(env->translation);
+	model = matrix_matrix_multiply(model, trans_mat);
+	mvp = matrix_make_identity();
+	mvp = matrix_matrix_multiply(mvp, model);
+	i = 0;
+	while (i < env->map_data.coord_count)
+	{
+		env->vectors[i] = matrix_vector_multiply(env->coords[i], mvp);
+		i++;
+	}
+}
+
+void		update_image(t_environment *env)
+{
+	char *val1;
+	char *val2;
+	char *val3;
+
+	clear_image(&env->img, 0x000000);
+	apply_transforms(env);
+	draw_faces(env, env->rgb);
+	put_image(env, &env->img);
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 5,
+	rgbtoi(env->rgb.r, env->rgb.g, env->rgb.b), env->map_name);
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 30, 0xff0f0f, "R:");
+	val1 = ft_itoa(env->rgb.r);
+	mlx_string_put(env->mlx_ptr, env->win_ptr,
+	30, 30, 0xff0f0f, val1);
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 50, 0x0fff0f, "G:");
+	val2 = ft_itoa(env->rgb.g);
+	mlx_string_put(env->mlx_ptr, env->win_ptr,
+	30, 50, 0x0fff0f, val2);
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 70, 0x0f0fff, "B:");
+	val3 = ft_itoa(env->rgb.b);
+	mlx_string_put(env->mlx_ptr, env->win_ptr,
+	30, 70, 0x0f0fff, val3);
+	free(val1);
+	free(val2);
+	free(val3);
 }

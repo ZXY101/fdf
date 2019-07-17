@@ -6,7 +6,7 @@
 #    By: stenner <stenner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/27 17:28:44 by stenner           #+#    #+#              #
-#    Updated: 2019/07/10 13:05:05 by stenner          ###   ########.fr        #
+#    Updated: 2019/07/17 11:27:47 by stenner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,26 +23,38 @@ SRC_NAME =	main.c \
 			images.c \
 			gfx_utility.c \
 			handle_hooks.c \
-			handle_coords.c
+			handle_coords.c \
+			mouse_key_release_down.c \
+			keys.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 
 SRCO = $(patsubst %.c, %.o, $(SRC))
 
-MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
+MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit -lm
 MLX_LFLAGS =  -lmlx -lXext -lX11 -lm
 
 FLAGS = -Wall -Werror -Wextra
 
-all: $(NAME)
+all: LIBFT VECLIB $(NAME)
 
-$(NAME): $(SRCO)
+LIBFT:
 	@make -C $(LIBFT_PATH)
+
+VECLIB:
 	@make -C $(VEC_LIB_PATH)
+
+$(LIBFT_PATH)libft.a:
+	@make -C $(LIBFT_PATH)
+
+$(VEC_LIB_PATH)libvec.a:
+	@make -C $(VEC_LIB_PATH)
+
+$(NAME): $(SRCO) $(LIBFT_PATH)libft.a $(VEC_LIB_PATH)libvec.a
 	@gcc $(FLAGS) $(SRCO) -L $(LIBFT_PATH) -lft -L $(VEC_LIB_PATH) -lvec -o $(NAME) $(MLX_FLAGS)
 	@echo "\033[32mBinary \033[1;32m$(NAME)\033[1;0m\033[32m Created.\033[0m"
 
-$(SRC_PATH)%.o: $(SRC_PATH)%.c
+$(SRC_PATH)%.o: $(SRC_PATH)%.c includes/fdf.h
 	@gcc $(FLAGS) -c $< -o $@
 
 clean:
@@ -57,4 +69,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all fclean clean re
+.PHONY: all fclean clean re LIBFT VECLIB 
