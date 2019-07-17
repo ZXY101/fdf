@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:45:25 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/15 18:27:22 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 12:22:46 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_matrix	matrix_projection(double fov, double a_r, double near, double far)
 {
-	t_matrix m;
-	double fov_rad;
+	t_matrix	m;
+	double		fov_rad;
 
 	init_to_zero(&m);
 	fov_rad = 1 / tan(fov * 0.5 / 180 * M_PI);
@@ -24,6 +24,5 @@ t_matrix	matrix_projection(double fov, double a_r, double near, double far)
 	m.m[2][2] = -(far + near) / (far - near);
 	m.m[3][2] = (-2 * far * near) / (far - near);
 	m.m[2][3] = -1;
-
 	return (m);
 }

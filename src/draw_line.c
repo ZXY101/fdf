@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:26:45 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/15 16:52:56 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 11:44:11 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 **Line drawing algorithm for when m < 1
 */
 
-static void	draw_line_lower(t_vector c1, t_vector c2, t_mlx_image *img, t_rgb rgb)
+static void	draw_line_lower(t_vector c1, t_vector c2, t_mlx_image *img, t_rgb c)
 {
 	int			i;
 	t_line_math l;
@@ -35,9 +35,9 @@ static void	draw_line_lower(t_vector c1, t_vector c2, t_mlx_image *img, t_rgb rg
 	{
 		l.q = ((c1.y + i * l.grad) - (int)(c1.y + i * l.grad));
 		l.iq = 1 - l.q;
-		pixel_put_image(img, rgbtoi(rgb.r * l.iq, rgb.g * l.iq, rgb.b * l.iq)
+		pixel_put_image(img, rgbtoi(c.r * l.iq, c.g * l.iq, c.b * l.iq)
 		, c1.x + i, c1.y + i * l.grad);
-		pixel_put_image(img, rgbtoi(rgb.r * l.q, rgb.g * l.q, rgb.b * l.q)
+		pixel_put_image(img, rgbtoi(c.r * l.q, c.g * l.q, c.b * l.q)
 		, c1.x + i, (c1.y + i * l.grad) + 1);
 		i++;
 	}
@@ -47,7 +47,7 @@ static void	draw_line_lower(t_vector c1, t_vector c2, t_mlx_image *img, t_rgb rg
 **Line drawing algorithm for when m > 1
 */
 
-static void	draw_line_upper(t_vector c1, t_vector c2, t_mlx_image *img, t_rgb rgb)
+static void	draw_line_upper(t_vector c1, t_vector c2, t_mlx_image *img, t_rgb c)
 {
 	int			i;
 	t_line_math l;
@@ -62,9 +62,9 @@ static void	draw_line_upper(t_vector c1, t_vector c2, t_mlx_image *img, t_rgb rg
 	{
 		l.q = ((c1.x + i * l.grad) - (int)(c1.x + i * l.grad));
 		l.iq = 1 - l.q;
-		pixel_put_image(img, rgbtoi(rgb.r * l.iq, rgb.g * l.iq, rgb.b * l.iq)
+		pixel_put_image(img, rgbtoi(c.r * l.iq, c.g * l.iq, c.b * l.iq)
 		, c1.x + i * l.grad, c1.y + i);
-		pixel_put_image(img, rgbtoi(rgb.r * l.q, rgb.g * l.q, rgb.b * l.q),
+		pixel_put_image(img, rgbtoi(c.r * l.q, c.g * l.q, c.b * l.q),
 		(c1.x + i * l.grad) + 1, c1.y + i);
 		i++;
 	}

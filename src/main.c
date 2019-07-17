@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:29:55 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/15 18:22:20 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 11:56:26 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int		main(int ac, char **av)
 	env.speed = 5;
 	init_image(&env, &env.img, WINDOW_LENGTH, WINDOW_HEIGHT);
 	FILL_RGB(env.rgb, 255, 255, 255);
-	FILL_VECTOR(env.rotation, 45 ,0 ,0 ,1);
-	FILL_VECTOR(env.scale, 10 ,10 ,10 ,1);
-	FILL_VECTOR(env.translation, WINDOW_LENGTH * 0.5 ,WINDOW_HEIGHT * 0.5, -9 ,1);
-	update_image(&env);
+	FILL_VECTOR(env.rotation, 45, 0, 0, 1);
+	FILL_VECTOR(env.scale, 10, 10, 10, 1);
+	FILL_VECTOR(env.translation, WINDOW_LENGTH * 0.5,
+	WINDOW_HEIGHT * 0.5, -9, 1);
 	handle_hooks(env.win_ptr, &env);
 	mlx_loop(env.mlx_ptr);
 	return (0);

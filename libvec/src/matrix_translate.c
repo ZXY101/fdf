@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:22:49 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/15 17:23:38 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 12:21:55 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 t_matrix	matrix_translate(t_vector v)
 {
 	t_matrix m;
-
 
 	init_to_zero(&m);
 	m.m[0][0] = 1;

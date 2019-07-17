@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/15 18:06:31 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 11:36:31 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@
 # include "../libvec/includes/libvec.h"
 # include <mlx.h>
 # include <math.h>
-//REMOVE
-# include <stdio.h>
-
-enum	e_translate
-{
-	left,
-	right,
-	up,
-	down
-};
 
 typedef struct	s_map_data
 {
@@ -66,7 +56,7 @@ typedef struct	s_mlx_image
 	char		*raw_data;
 	int			width;
 	int			height;
-	t_vector		pos;
+	t_vector	pos;
 }				t_mlx_image;
 
 typedef struct	s_environment
@@ -93,12 +83,12 @@ typedef struct	s_environment
 **Utility
 */
 
-void			draw_line(t_vector c1, t_vector c2, t_mlx_image *img, t_rgb rgb);
+void			draw_line(t_vector c1, t_vector c2,
+				t_mlx_image *img, t_rgb rgb);
 void			draw_faces(t_environment *env, t_rgb rgb);
 t_vector		ndc_to_screen_space(t_vector coord);
 int				rgbtoi(int r, int g, int b);
 void			update_image(t_environment *env);
-void			map_translate(t_environment *env, enum e_translate t);
 
 /*
 **Images
@@ -114,22 +104,24 @@ void			put_image(t_environment *env, t_mlx_image *img);
 **Hooks
 */
 
-int				key_input(int key, t_environment *env);
-int				finish(void *none);
 void			handle_hooks(void *win_ptr, t_environment *env);
 
 /*
-**Keys
+**Keys & Buttons
 */
 
-void			arrow_keys(int key, t_environment *env);
-void			zoom(int key, t_environment *env);
+void			rotate_keys(t_environment *env);
+void			arrow_keys(t_environment *env);
+void			zoom_keys(t_environment *env);
 void			rgb_keys(t_environment *env);
-
+int				key_down(int key, t_environment *env);
+int				key_release(int key, t_environment *env);
+int				mouse_down(int key, int x, int y, t_environment *env);
+int				mouse_release(int key, int x, int y, t_environment *env);
 
 /*
 **Coords
 */
 
-void		handle_coords(int ac, char **av, t_environment *env);
+void			handle_coords(int ac, char **av, t_environment *env);
 #endif

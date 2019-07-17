@@ -6,7 +6,7 @@
 #    By: stenner <stenner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/27 17:28:44 by stenner           #+#    #+#              #
-#    Updated: 2019/07/15 17:04:20 by stenner          ###   ########.fr        #
+#    Updated: 2019/07/17 11:27:47 by stenner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC_NAME =	main.c \
 			gfx_utility.c \
 			handle_hooks.c \
 			handle_coords.c \
+			mouse_key_release_down.c \
 			keys.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))

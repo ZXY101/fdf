@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/05 15:53:17 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/15 16:49:25 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 11:53:30 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	malloc_coords(int fd, t_environment *env)
 	env->map_data.coord_count = 0;
 	env->map_data.x_coords = 0;
 	env->map_data.y_coords = 0;
-	env->map_data.i = 0;
 	while (get_next_line(fd, &env->map_data.line) > 0)
 	{
 		env->map_data.i = 0;
@@ -55,14 +54,16 @@ static void	malloc_coords(int fd, t_environment *env)
 		free(env->map_data.line_split);
 		free(env->map_data.line);
 	}
-	env->coords = (t_vector*)malloc(sizeof(t_vector) * env->map_data.coord_count);
-	env->vectors = (t_vector*)malloc(sizeof(t_vector) * env->map_data.coord_count);
+	env->coords = (t_vector*)malloc(sizeof(t_vector) *
+	env->map_data.coord_count);
+	env->vectors = (t_vector*)malloc(sizeof(t_vector) *
+	env->map_data.coord_count);
 }
 
 void		get_vectors(int fd, t_environment *env)
 {
 	t_map_data	map_data;
-	t_vector		coord;
+	t_vector	coord;
 
 	map_data.coord_count = 0;
 	map_data.x_coords = 0;

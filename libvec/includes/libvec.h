@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:56:29 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/15 17:23:56 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 12:14:23 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,4 @@ t_matrix		matrix_matrix_multiply(t_matrix m1, t_matrix m2);
 t_matrix		matrix_rotate(t_vector v);
 t_matrix		matrix_scale(t_vector v);
 void			init_to_zero(t_matrix *m);
-
-
 #endif

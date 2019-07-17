@@ -6,71 +6,52 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 11:32:08 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/15 18:06:23 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/17 11:52:33 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#define ZOOM 1.1
 
-void	zoom(int key, t_environment *env)
+void	rotate_keys(t_environment *env)
 {
-	t_vector	v;
-	int			i;
-
-	i = 0;
-	while (i < env->map_data.coord_count)
-	{
-		FILL_VECTOR(v, env->coords[i].x, env->coords[i].y, env->coords[i].z, 1);
-		if (key == 24)
-			v = vector_multiply(v, ZOOM);
-		else if (key == 27)
-			v = vector_divide(v, ZOOM);
-		FILL_COORD(env->coords[i], v.x, v.y, v.z);
-		i++;
-	}
-	update_image(env);
+	env->rotation.y += env->keys[0] ? env->speed : 0;
+	env->rotation.y -= env->keys[2] ? env->speed : 0;
+	env->rotation.x += env->keys[13] ? env->speed : 0;
+	env->rotation.x -= env->keys[1] ? env->speed : 0;
+	env->rotation.z += env->keys[14] ? env->speed : 0;
+	env->rotation.z -= env->keys[12] ? env->speed : 0;
 }
 
-void	arrow_keys(int key, t_environment *env)
+void	zoom_keys(t_environment *env)
 {
-	enum e_translate t;
+	if (env->keys[24])
+	{
+		env->scale = env->keys[257] ? vector_multiply(env->scale, 1.1) :
+		vector_multiply(env->scale, 1.05);
+		env->scale.w = 1;
+	}
+	if (env->keys[27])
+	{
+		env->scale = env->keys[257] ? vector_multiply(env->scale, 0.9) :
+		vector_multiply(env->scale, 0.95);
+		env->scale.w = 1;
+	}
+}
 
-	if (key == 123)
-	{
-		t = left;
-		map_translate(env, t);
-	}
-	if (key == 124)
-	{
-		t = right;
-		map_translate(env, t);
-	}
-	if (key == 125)
-	{
-		t = down;
-		map_translate(env, t);
-	}
-	if (key == 126)
-	{
-		t = up;
-		map_translate(env, t);
-	}
+void	arrow_keys(t_environment *env)
+{
+	env->translation.x -= env->keys[123] ? env->speed : 0;
+	env->translation.x += env->keys[124] ? env->speed : 0;
+	env->translation.y -= env->keys[126] ? env->speed : 0;
+	env->translation.y += env->keys[125] ? env->speed : 0;
 }
 
 void	rgb_keys(t_environment *env)
 {
-	if (env->keys[86] && env->rgb.r < 255)
-		env->rgb.r = env->rgb.r + 5;
-	if (env->keys[87] && env->rgb.g < 255)
-		env->rgb.g= env->rgb.g + 5;
-	if (env->keys[88] && env->rgb.b < 255)
-		env->rgb.b = env->rgb.b + 5;
-
-	if (env->keys[83] && env->rgb.r > 0)
-		env->rgb.r = env->rgb.r - 5;
-	if (env->keys[84] && env->rgb.g > 0)
-		env->rgb.g= env->rgb.g - 5;
-	if (env->keys[85] && env->rgb.b > 0)
-		env->rgb.b = env->rgb.b - 5;
+	env->rgb.r += env->keys[86] && env->rgb.r < 255 ? 5 : 0;
+	env->rgb.g += env->keys[87] && env->rgb.g < 255 ? 5 : 0;
+	env->rgb.b += env->keys[88] && env->rgb.b < 255 ? 5 : 0;
+	env->rgb.r -= env->keys[83] && env->rgb.r > 0 ? 5 : 0;
+	env->rgb.g -= env->keys[84] && env->rgb.g > 0 ? 5 : 0;
+	env->rgb.b -= env->keys[85] && env->rgb.b > 0 ? 5 : 0;
 }
