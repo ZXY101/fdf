@@ -6,7 +6,7 @@
 /*   By: Shaun <Shaun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:13:27 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/21 13:51:39 by Shaun            ###   ########.fr       */
+/*   Updated: 2019/07/21 17:39:41 by Shaun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 
 void		starting_scale(t_environment *env)
 {
-	if (env->map_data.coord_count < 250)
+	if (ft_strcmp("cube", env->map_name) == 0)
+		FILL_VECTOR(env->scale, 300, 300, 300, 1);
+	else if (env->map_data.coord_count < 250)
 		FILL_VECTOR(env->scale, 30, 30, 30, 1);
 	else if (env->map_data.coord_count < 500)
 		FILL_VECTOR(env->scale, 25, 25, 25, 1);
@@ -104,6 +106,8 @@ void		apply_transforms(t_environment *env)
 	while (i < env->map_data.coord_count)
 	{
 		env->vectors[i] = matrix_vector_multiply(env->coords[i], mvp);
+		ft_putnbr(env->coords[i].x);
+		ft_putchar('\n');
 		if (env->norm_world == 1)
 		{
 			env->vectors[i] = vector_normalise(env->vectors[i]);
@@ -120,7 +124,11 @@ void		update_image(t_environment *env)
 	char *val3;
 
 	apply_transforms(env);
-	draw_faces(env, env->rgb);
+	if (ft_strcmp("cube", env->map_name) != 0)
+		draw_faces(env, env->rgb);
+	else
+		draw_cube(env, env->rgb);
+	
 	put_image(env, &env->img);
 	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 5,
 	rgbtoi(env->rgb.r, env->rgb.g, env->rgb.b), env->map_name);

@@ -6,7 +6,7 @@
 #    By: Shaun <Shaun@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/27 17:28:44 by stenner           #+#    #+#              #
-#    Updated: 2019/07/21 12:37:59 by Shaun            ###   ########.fr        #
+#    Updated: 2019/07/21 16:46:39 by Shaun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ SRC_NAME =	main.c \
 			handle_coords.c \
 			mouse_key_release_down.c \
 			keys.c \
-			misc.c
+			misc.c \
+			tictactoe.c \
+			cube.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 

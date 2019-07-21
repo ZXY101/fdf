@@ -6,7 +6,7 @@
 /*   By: Shaun <Shaun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/21 12:52:29 by Shaun            ###   ########.fr       */
+/*   Updated: 2019/07/21 17:20:25 by Shaun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_vector		ndc_to_screen_space(t_vector coord);
 int				rgbtoi(int r, int g, int b);
 void			update_image(t_environment *env);
 void			starting_scale(t_environment *env);
-
+int				is_in_window(t_vector *coords, int i, int j);
 /*
 **Images
 */
@@ -138,4 +138,15 @@ void			handle_coords(int ac, char **av, t_environment *env);
 
 void	init_env(t_environment *env, char **av);
 void	fun_bools(int key, t_environment *env);
+
+/*
+**Tic Tac Toe
+*/
+void	run_ttt(t_environment *env);
+
+/*
+**Cube
+*/
+void	exec_cube(t_environment *env);
+void	draw_cube(t_environment *env, t_rgb rgb);
 #endif
