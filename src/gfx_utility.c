@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gfx_utility.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Shaun <Shaun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:13:27 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 14:44:41 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/21 13:51:39 by Shaun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void		apply_transforms(t_environment *env)
 	model = matrix_rotate(env->rotation);
 	scale_mat = matrix_scale(env->scale);
 	model = matrix_matrix_multiply(model, scale_mat);
-	trans_mat = matrix_translate(env->translation);
+	trans_mat = matrix_translate(env->translate);
 	model = matrix_matrix_multiply(model, trans_mat);
 	mvp = matrix_make_identity();
 	mvp = matrix_matrix_multiply(mvp, model);
@@ -104,6 +104,11 @@ void		apply_transforms(t_environment *env)
 	while (i < env->map_data.coord_count)
 	{
 		env->vectors[i] = matrix_vector_multiply(env->coords[i], mvp);
+		if (env->norm_world == 1)
+		{
+			env->vectors[i] = vector_normalise(env->vectors[i]);
+			env->vectors[i] = ndc_to_screen_space(env->vectors[i]);
+		}
 		i++;
 	}
 }

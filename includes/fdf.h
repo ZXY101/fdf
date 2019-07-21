@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Shaun <Shaun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 17:46:30 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 14:42:29 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/21 12:52:29 by Shaun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # define FILL_RGB(RGB, R, G, B) RGB.r = R, RGB.g = G, RGB.b = B
 # include "../libft/includes/libft.h"
 # include "../libvec/includes/libvec.h"
-# include <mlx.h>
+// # include <mlx.h>
+#include "../MinilibX/sierra/mlx.h"
 # include <math.h>
 
 typedef struct	s_map_data
@@ -71,13 +72,15 @@ typedef struct	s_environment
 	char		*map_name;
 	t_vector	rotation;
 	t_vector	scale;
-	t_vector	translation;
+	t_vector	translate;
 	int			speed;
 	int			keys[512];
 	int			buttons[10];
+	int			rot_dirs[20];
 	int			auto_rotate;
 	int			auto_rotate_dir;
 	int			colour_trip;
+	int			norm_world;
 	int			clearer;
 }				t_environment;
 
@@ -128,4 +131,11 @@ void			fixed_rotate(int key, t_environment *env);
 */
 
 void			handle_coords(int ac, char **av, t_environment *env);
+
+/*
+**Misc
+*/
+
+void	init_env(t_environment *env, char **av);
+void	fun_bools(int key, t_environment *env);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_key_release_down.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Shaun <Shaun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:23:42 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 14:45:09 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/21 12:54:53 by Shaun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,15 @@ int		key_down(int key, t_environment *env)
 {
 	if (key == 53)
 		exit(0);
-	if (key == 49)
-		env->auto_rotate *= -1;
-	if (key == 36)
-		env->colour_trip *= -1;
-	if (key == 51)
-		env->clearer *= -1;
-	if (key == 78)
-		env->auto_rotate_dir = 1;
-	if (key == 69)
-		env->auto_rotate_dir = -1;
+	fun_bools(key, env);
+	if (key == 7)
+		env->rot_dirs[key] *= -1;
+	if (key == 6)
+		env->rot_dirs[key] *= -1;
+	if (key == 16)
+		env->rot_dirs[key] *= -1;
+	if (key == 15)
+		FILL_VECTOR(env->translate, WINDOW_LENGTH / 2, WINDOW_HEIGHT / 2, 0, 0);
 	if (key == 82)
 		FILL_RGB(env->rgb, 255, 255, 255);
 	if (key == 65)

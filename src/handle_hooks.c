@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_hooks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Shaun <Shaun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:59:01 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 14:38:36 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/21 12:55:34 by Shaun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,15 @@ static int	fun(t_environment *env)
 	zoom_keys(env);
 	rgb_keys(env);
 	if (env->auto_rotate == 1)
-		env->rotation.y += env->auto_rotate_dir == 1 ? 1 : -1;
+	{
+		if (env->rot_dirs[16] == 1)
+			env->rotation.y += env->auto_rotate_dir == 1 ? 1 : -1;
+		if (env->rot_dirs[7] == 1)
+			env->rotation.x += env->auto_rotate_dir == 1 ? 1 : -1;
+		if (env->rot_dirs[6] == 1)
+			env->rotation.z += env->auto_rotate_dir == 1 ? 1 : -1;
+			
+	}
 	if (env->colour_trip == 1)
 		FILL_RGB(env->rgb, rand() % 256, rand() % 256, rand() % 256);
 	update_image(env);
