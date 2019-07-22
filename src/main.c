@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Shaun <Shaun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 16:29:55 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/21 16:59:21 by Shaun            ###   ########.fr       */
+/*   Updated: 2019/07/22 11:29:07 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ int		main(int ac, char **av)
 {
 	t_environment	env;
 
-	if (ac == 2 && ft_strcmp("ttt", av[1]) == 0)
-		run_ttt(&env);
-	else if (ac == 2 && ft_strcmp("cube", av[1]) == 0)
+	if (ac == 2 && ft_strcmp("cube", av[1]) == 0)
 		exec_cube(&env);
 	else
 		handle_coords(ac, av, &env);

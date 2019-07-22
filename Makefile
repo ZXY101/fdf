@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Shaun <Shaun@student.42.fr>                +#+  +:+       +#+         #
+#    By: stenner <stenner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/27 17:28:44 by stenner           #+#    #+#              #
-#    Updated: 2019/07/21 16:46:39 by Shaun            ###   ########.fr        #
+#    Updated: 2019/07/22 11:29:45 by stenner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,6 @@ NAME = fdf
 LIBFT_PATH = ./libft/
 
 VEC_LIB_PATH = ./libvec/
-
-MLX_PATH = ./MinilibX/
-
 
 SRC_PATH = ./src/
 
@@ -30,7 +27,6 @@ SRC_NAME =	main.c \
 			mouse_key_release_down.c \
 			keys.c \
 			misc.c \
-			tictactoe.c \
 			cube.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
@@ -57,7 +53,7 @@ $(VEC_LIB_PATH)libvec.a:
 	@make -C $(VEC_LIB_PATH)
 
 $(NAME): $(SRCO) $(LIBFT_PATH)libft.a $(VEC_LIB_PATH)libvec.a
-	@gcc $(FLAGS) $(SRCO) -L $(LIBFT_PATH) -lft -L $(VEC_LIB_PATH) -lvec -L $(MLX_PATH) -lmlx -o $(NAME) $(MLX_FLAGS)
+	@gcc $(FLAGS) $(SRCO) -L $(LIBFT_PATH) -lft -L $(VEC_LIB_PATH) -lvec -o $(NAME) $(MLX_FLAGS)
 	@echo "\033[32mBinary \033[1;32m$(NAME)\033[1;0m\033[32m Created.\033[0m"
 
 $(SRC_PATH)%.o: $(SRC_PATH)%.c includes/fdf.h

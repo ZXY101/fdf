@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gfx_utility.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Shaun <Shaun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:13:27 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/21 17:39:41 by Shaun            ###   ########.fr       */
+/*   Updated: 2019/07/22 11:35:55 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,45 +106,21 @@ void		apply_transforms(t_environment *env)
 	while (i < env->map_data.coord_count)
 	{
 		env->vectors[i] = matrix_vector_multiply(env->coords[i], mvp);
-		ft_putnbr(env->coords[i].x);
-		ft_putchar('\n');
-		if (env->norm_world == 1)
-		{
-			env->vectors[i] = vector_normalise(env->vectors[i]);
-			env->vectors[i] = ndc_to_screen_space(env->vectors[i]);
-		}
+		env->vectors[i] = env->norm_world == 1 ?
+		vector_normalise(env->vectors[i]) : env->vectors[i];
+		env->vectors[i] = env->norm_world == 1 ?
+		ndc_to_screen_space(env->vectors[i]) : env->vectors[i];
 		i++;
 	}
 }
 
 void		update_image(t_environment *env)
 {
-	char *val1;
-	char *val2;
-	char *val3;
-
 	apply_transforms(env);
 	if (ft_strcmp("cube", env->map_name) != 0)
 		draw_faces(env, env->rgb);
 	else
 		draw_cube(env, env->rgb);
-	
 	put_image(env, &env->img);
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 5,
-	rgbtoi(env->rgb.r, env->rgb.g, env->rgb.b), env->map_name);
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 30, 0xff0f0f, "R:");
-	val1 = ft_itoa(env->rgb.r);
-	mlx_string_put(env->mlx_ptr, env->win_ptr,
-	30, 30, 0xff0f0f, val1);
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 50, 0x0fff0f, "G:");
-	val2 = ft_itoa(env->rgb.g);
-	mlx_string_put(env->mlx_ptr, env->win_ptr,
-	30, 50, 0x0fff0f, val2);
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 70, 0x0f0fff, "B:");
-	val3 = ft_itoa(env->rgb.b);
-	mlx_string_put(env->mlx_ptr, env->win_ptr,
-	30, 70, 0x0f0fff, val3);
-	free(val1);
-	free(val2);
-	free(val3);
+	put_text(env);
 }

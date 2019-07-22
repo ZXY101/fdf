@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_hooks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Shaun <Shaun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:59:01 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/21 17:00:03 by Shaun            ###   ########.fr       */
+/*   Updated: 2019/07/22 11:33:16 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static int	fun(t_environment *env)
 			env->rotation.x += env->auto_rotate_dir == 1 ? 1 : -1;
 		if (env->rot_dirs[6] == 1)
 			env->rotation.z += env->auto_rotate_dir == 1 ? 1 : -1;
-			
 	}
 	if (env->colour_trip == 1)
 		FILL_RGB(env->rgb, rand() % 256, rand() % 256, rand() % 256);
