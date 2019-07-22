@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Shaun <Shaun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 11:32:08 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 15:00:38 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/21 12:26:15 by Shaun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	zoom_keys(t_environment *env)
 
 void	arrow_keys(t_environment *env)
 {
-	env->translation.x -= env->keys[123] ? env->speed : 0;
-	env->translation.x += env->keys[124] ? env->speed : 0;
-	env->translation.y -= env->keys[126] ? env->speed : 0;
-	env->translation.y += env->keys[125] ? env->speed : 0;
+	env->translate.x -= env->keys[123] ? env->speed : 0;
+	env->translate.x += env->keys[124] ? env->speed : 0;
+	env->translate.y -= env->keys[126] ? env->speed : 0;
+	env->translate.y += env->keys[125] ? env->speed : 0;
 }
 
 void	rgb_keys(t_environment *env)

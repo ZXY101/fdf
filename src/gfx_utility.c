@@ -6,7 +6,7 @@
 /*   By: stenner <stenner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 11:13:27 by stenner           #+#    #+#             */
-/*   Updated: 2019/07/17 14:44:41 by stenner          ###   ########.fr       */
+/*   Updated: 2019/07/22 11:35:55 by stenner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 
 void		starting_scale(t_environment *env)
 {
-	if (env->map_data.coord_count < 250)
+	if (ft_strcmp("cube", env->map_name) == 0)
+		FILL_VECTOR(env->scale, 300, 300, 300, 1);
+	else if (env->map_data.coord_count < 250)
 		FILL_VECTOR(env->scale, 30, 30, 30, 1);
 	else if (env->map_data.coord_count < 500)
 		FILL_VECTOR(env->scale, 25, 25, 25, 1);
@@ -96,7 +98,7 @@ void		apply_transforms(t_environment *env)
 	model = matrix_rotate(env->rotation);
 	scale_mat = matrix_scale(env->scale);
 	model = matrix_matrix_multiply(model, scale_mat);
-	trans_mat = matrix_translate(env->translation);
+	trans_mat = matrix_translate(env->translate);
 	model = matrix_matrix_multiply(model, trans_mat);
 	mvp = matrix_make_identity();
 	mvp = matrix_matrix_multiply(mvp, model);
@@ -104,34 +106,21 @@ void		apply_transforms(t_environment *env)
 	while (i < env->map_data.coord_count)
 	{
 		env->vectors[i] = matrix_vector_multiply(env->coords[i], mvp);
+		env->vectors[i] = env->norm_world == 1 ?
+		vector_normalise(env->vectors[i]) : env->vectors[i];
+		env->vectors[i] = env->norm_world == 1 ?
+		ndc_to_screen_space(env->vectors[i]) : env->vectors[i];
 		i++;
 	}
 }
 
 void		update_image(t_environment *env)
 {
-	char *val1;
-	char *val2;
-	char *val3;
-
 	apply_transforms(env);
-	draw_faces(env, env->rgb);
+	if (ft_strcmp("cube", env->map_name) != 0)
+		draw_faces(env, env->rgb);
+	else
+		draw_cube(env, env->rgb);
 	put_image(env, &env->img);
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 5,
-	rgbtoi(env->rgb.r, env->rgb.g, env->rgb.b), env->map_name);
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 30, 0xff0f0f, "R:");
-	val1 = ft_itoa(env->rgb.r);
-	mlx_string_put(env->mlx_ptr, env->win_ptr,
-	30, 30, 0xff0f0f, val1);
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 50, 0x0fff0f, "G:");
-	val2 = ft_itoa(env->rgb.g);
-	mlx_string_put(env->mlx_ptr, env->win_ptr,
-	30, 50, 0x0fff0f, val2);
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 70, 0x0f0fff, "B:");
-	val3 = ft_itoa(env->rgb.b);
-	mlx_string_put(env->mlx_ptr, env->win_ptr,
-	30, 70, 0x0f0fff, val3);
-	free(val1);
-	free(val2);
-	free(val3);
+	put_text(env);
 }
