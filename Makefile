@@ -16,6 +16,8 @@ LIBFT_PATH = ./libft/
 
 VEC_LIB_PATH = ./libvec/
 
+MLX_PATH = ./minilibx_macos/
+
 SRC_PATH = ./src/
 
 SRC_NAME =	main.c \
@@ -44,6 +46,9 @@ LIBFT:
 	@make -C $(LIBFT_PATH)
 
 VECLIB:
+	@make -C $(MLX_PATH)
+
+MLX:
 	@make -C $(VEC_LIB_PATH)
 
 $(LIBFT_PATH)libft.a:
@@ -52,8 +57,11 @@ $(LIBFT_PATH)libft.a:
 $(VEC_LIB_PATH)libvec.a:
 	@make -C $(VEC_LIB_PATH)
 
-$(NAME): $(SRCO) $(LIBFT_PATH)libft.a $(VEC_LIB_PATH)libvec.a
-	@gcc $(FLAGS) $(SRCO) -L $(LIBFT_PATH) -lft -L $(VEC_LIB_PATH) -lvec -o $(NAME) $(MLX_FLAGS)
+$(MLX_PATH)libmlx.a:
+	@make -C $(VEC_LIB_PATH)
+
+$(NAME): $(SRCO) $(LIBFT_PATH)libft.a $(VEC_LIB_PATH)libvec.a $(MLX_PATH)libmlx.a
+	@gcc $(FLAGS) $(SRCO) -L $(LIBFT_PATH) -lft -L $(VEC_LIB_PATH) -lvec -L $(MLX_PATH) -lmlx -o $(NAME) $(MLX_FLAGS)
 	@echo "\033[32mBinary \033[1;32m$(NAME)\033[1;0m\033[32m Created.\033[0m"
 
 $(SRC_PATH)%.o: $(SRC_PATH)%.c includes/fdf.h
@@ -66,6 +74,7 @@ clean:
 fclean: clean
 	@make -C $(LIBFT_PATH)/ fclean
 	@make -C $(VEC_LIB_PATH)/ fclean
+	@make -C $(MLX_PATH)/ clean
 	@/bin/rm -rf $(NAME)
 	@echo "\033[31mBin \033[1;31m$(NAME)\033[1;0m\033[31m Removed.\033[0m"
 

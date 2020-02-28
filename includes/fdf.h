@@ -18,7 +18,7 @@
 # define FILL_RGB(RGB, R, G, B) RGB.r = R, RGB.g = G, RGB.b = B
 # include "../libft/includes/libft.h"
 # include "../libvec/includes/libvec.h"
-# include <mlx.h>
+# include "../minilibx_macos/mlx.h"
 # include <math.h>
 
 typedef struct	s_map_data
