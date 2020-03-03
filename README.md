@@ -62,6 +62,8 @@ Numpad <kbd>.</kbd> : make black
 
 <kbd>Space</kbd> : toggle auto rotate
 
+<kbd>Shift</kbd> : increase movement/rotation/zoom speed
+
 <kbd>X</kbd> : toggle x-axis auto rotate
 
 <kbd>Y</kbd> : toggle x-axis auto rotate
